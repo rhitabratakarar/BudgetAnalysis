@@ -11,4 +11,4 @@
 # Start the application:
 
 * Run the app-ui (REACT APP).
-* Run the BudgetAnalysisDbAPI project. (Make sure you have properly configured the connection string in the app configs).
+* Run the BudgetAnalysisDbAPI project. (Make sure you have properly configured the connection string in the appsettings).
