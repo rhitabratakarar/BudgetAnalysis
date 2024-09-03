@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Reflection;
 
 namespace SheetSyncTool
 {
@@ -8,7 +7,7 @@ namespace SheetSyncTool
         public static void Main(string[] args)
         {
             IConfiguration configuration = new ConfigurationBuilder()
-                                            .AddUserSecrets(Assembly.GetExecutingAssembly())
+                                            .AddJsonFile("appsettings.json")
                                             .Build();
 
             try
