@@ -11,13 +11,6 @@ namespace SheetSyncTool
                                             .AddUserSecrets(Assembly.GetExecutingAssembly())
                                             .Build();
 
-            #region api_key_testing
-            // string? API_KEY = configuration["SHEETS_ONLY_API_KEY"];
-
-            // if (API_KEY != null)
-            //    Console.WriteLine(API_KEY);
-            #endregion
-
             try
             {
                 ISheetSyncer sheetSyncer = new SheetSyncer(configuration);
