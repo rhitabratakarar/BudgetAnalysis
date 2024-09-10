@@ -6,8 +6,9 @@ namespace SheetSyncTool
     {
         public static void Main(string[] args)
         {
+            const string APP_SETTINGS = "appsettings.json";
             IConfiguration configuration = new ConfigurationBuilder()
-                                            .AddJsonFile("appsettings.json")
+                                            .AddJsonFile(APP_SETTINGS)
                                             .Build();
 
             try
