@@ -8,6 +8,11 @@
 * Details will be inserted into database after this.
 
 
+# Authentication Datastore
+
+* Navigate to the location "$env:APPDATA\BudgetAnalysis.SheetSyncer".
+
+
 # Start the application:
 
 * Run the app-ui (REACT APP).
