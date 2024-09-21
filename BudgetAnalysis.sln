@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetAnalysisDbApi", "BudgetAnalysisDbApi\BudgetAnalysisDbApi.csproj", "{01CBBE56-DCD2-4CD8-92EC-1C5B7171B25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetAnalysisDbApi", "BudgetAnalysisDbApi\BudgetAnalysisDbApi.csproj", "{01CBBE56-DCD2-4CD8-92EC-1C5B7171B25A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetSyncTool", "SheetSyncTool\SheetSyncTool.csproj", "{AA9403E8-DAC9-4121-A8D9-3FB6ADCCD45C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetSyncTool", "SheetSyncTool\SheetSyncTool.csproj", "{AA9403E8-DAC9-4121-A8D9-3FB6ADCCD45C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetSyncTool.UnitTests", "SheetSyncTool.UnitTests\SheetSyncTool.UnitTests.csproj", "{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AA9403E8-DAC9-4121-A8D9-3FB6ADCCD45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA9403E8-DAC9-4121-A8D9-3FB6ADCCD45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA9403E8-DAC9-4121-A8D9-3FB6ADCCD45C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
