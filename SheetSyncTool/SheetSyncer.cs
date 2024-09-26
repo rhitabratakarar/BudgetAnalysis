@@ -1,5 +1,6 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Util.Store;
 using Microsoft.Extensions.Configuration;
 
@@ -22,14 +23,16 @@ namespace SheetSyncTool
             UserCredential? credential = await GetValidatedUserCredential();
             SheetsService? sheetsService = null;
 
+            string spreadSheetId = this.configuration["SheetID"]!;
+            string rangeInSheet = this.configuration["SheetColumnRange"]!;
+
             if (credential != null)
                 sheetsService = GetSheetsService(credential);
 
-            if (sheetsService != null)
+            if (sheetsService != null && spreadSheetId != null && spreadSheetId != "")
             {
-                // TODO: if got a validated sheets service, then run the operations...
-                // var sheets = await sheetsService.Spreadsheets.Values.Get();
-
+                SpreadsheetsResource.ValuesResource.GetRequest sheetsRequest = sheetsService.Spreadsheets.Values.Get(spreadSheetId, rangeInSheet);
+                ValueRange values = await sheetsRequest.ExecuteAsync();
             }
         }
 
@@ -50,16 +53,20 @@ namespace SheetSyncTool
                     {
                         credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
                                 GoogleClientSecrets.FromStream(stream).Secrets,
-                                    new[] { SheetsService.Scope.Spreadsheets },
-                                    "user", CancellationToken.None, new FileDataStore("Books.ListMyLibrary"));
+                                new[] { SheetsService.Scope.Spreadsheets },
+                                Environment.UserName, CancellationToken.None,
+                                new FileDataStore("BudgetAnalysis.SheetSyncer"));
                     }
                 }
                 catch (FileNotFoundException fileNotFoundException)
                 {
                     Console.WriteLine(fileNotFoundException.Message + "<The passed file is absent from the directory>");
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message);
+                }
             }
-
 
             return credential;
         }
