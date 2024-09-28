@@ -4,6 +4,7 @@ namespace SheetSyncTool
 {
     public class Program
     {
+        [STAThread]
         public static void Main(string[] args)
         {
             const string APP_SETTINGS = "appsettings.json";
@@ -14,7 +15,7 @@ namespace SheetSyncTool
             try
             {
                 ISheetSyncer sheetSyncer = new SheetSyncer(configuration);
-                sheetSyncer.Sync();
+                sheetSyncer.Sync().Wait();
             }
             catch (Exception e)
             {

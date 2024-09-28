@@ -2,6 +2,6 @@
 {
     internal interface ISheetSyncer
     {
-        void Sync();
+        Task Sync();
     }
 }

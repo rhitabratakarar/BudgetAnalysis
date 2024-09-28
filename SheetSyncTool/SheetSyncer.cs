@@ -19,10 +19,10 @@ namespace SheetSyncTool
         /// This method will sync the changes with the google sheet mentioned and will update the database.
         /// </summary>
 
-        [STAThread]
-        public void Sync()
+        public async Task Sync()
         {
-            Execute().Wait();
+            await Execute();
+            return;
         }
 
         /// <summary>
