@@ -18,38 +18,31 @@ namespace SheetSyncTool
         /// <summary>
         /// This method will sync the changes with the google sheet mentioned and will update the database.
         /// </summary>
-        public async void Sync()
+
+        [STAThread]
+        public void Sync()
         {
-            UserCredential? credential = await GetValidatedUserCredential();
-            SheetsService? sheetsService = null;
-
-            string spreadSheetId = this.configuration["SheetID"]!;
-            string rangeInSheet = this.configuration["SheetColumnRange"]!;
-
-            if (credential != null)
-                sheetsService = GetSheetsService(credential);
-
-            if (sheetsService != null && spreadSheetId != null && spreadSheetId != "")
-            {
-                SpreadsheetsResource.ValuesResource.GetRequest sheetsRequest = sheetsService.Spreadsheets.Values.Get(spreadSheetId, rangeInSheet);
-                ValueRange values = await sheetsRequest.ExecuteAsync();
-            }
+            Execute().Wait();
         }
 
         /// <summary>
-        /// method utilized to validate secrets json file.
+        /// Method to start execution of sheet operations.
         /// </summary>
-        /// <returns>UserCredential which is Google Validated</returns>
-        private async Task<UserCredential?> GetValidatedUserCredential()
+        /// <returns></returns>
+        private async Task Execute()
         {
-            string CLIENT_SECRETS_FILENAME = this.configuration["ClientSecretFile"]!;
+            string CLIENT_SECRETS_FILE = this.configuration["ClientSecretFile"]!;
+            string spreadSheetId = this.configuration["SheetID"]!;
+            string rangeInSheet = this.configuration["SheetColumnRange"]!;
+
             UserCredential? credential = null;
 
-            if (CLIENT_SECRETS_FILENAME != null)
+            #region Generating a valid credential.
+            if (CLIENT_SECRETS_FILE != null)
             {
                 try
                 {
-                    using (var stream = new FileStream(CLIENT_SECRETS_FILENAME, FileMode.Open, FileAccess.Read))
+                    using (var stream = new FileStream(CLIENT_SECRETS_FILE, FileMode.Open, FileAccess.Read))
                     {
                         credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
                                 GoogleClientSecrets.FromStream(stream).Secrets,
@@ -67,35 +60,38 @@ namespace SheetSyncTool
                     Console.WriteLine("ERROR: " + e.Message);
                 }
             }
+            #endregion
 
-            return credential;
-        }
 
-        /// <summary>
-        /// This will provide the sheets service which is created using a validated User credential.
-        /// </summary>
-        /// <param name="credential">This should be the validated credential</param>
-        /// <returns>Sheets Service reference</returns>
-        private SheetsService? GetSheetsService(UserCredential credential)
-        {
-            try
+            #region create a sheet service to connect to existing sheet in cloud.
+            SheetsService service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
             {
-                SheetsService service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = configuration["ApplicationName"] == null ? "Analyzer" : configuration["ApplicationName"]
-                });
-                return service;
-            }
-            catch (AggregateException exceptions)
+                HttpClientInitializer = credential,
+                ApplicationName = this.configuration["ApplicationName"]!
+            });
+            #endregion
+
+
+            #region execute spreadsheet operations...
+            if (service != null && spreadSheetId != null && spreadSheetId != "")
             {
-                foreach (Exception e in exceptions.InnerExceptions)
+                try
                 {
-                    Console.WriteLine("ERROR: " + e.Message);
+                    SpreadsheetsResource.ValuesResource.GetRequest sheetsRequest = service.Spreadsheets.Values.Get(spreadSheetId, rangeInSheet);
+                    ValueRange values = await sheetsRequest.ExecuteAsync();
+                    Console.WriteLine(values);
                 }
-                return null;
+                catch (AggregateException exs)
+                {
+                    foreach (Exception e in exs.InnerExceptions)
+                    {
+                        Console.WriteLine("ERROR: " + e.Message);
+                    }
+                }
             }
-        }
+            #endregion
 
+            return;
+        }
     }
 }
