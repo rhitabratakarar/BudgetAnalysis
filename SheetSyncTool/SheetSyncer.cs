@@ -37,7 +37,7 @@ namespace SheetSyncTool
 
             UserCredential? credential = null;
 
-            #region Generating a valid credential.
+            #region GENERATE VALID CREDENTIAL.
             if (CLIENT_SECRETS_FILE != null)
             {
                 try
@@ -62,8 +62,7 @@ namespace SheetSyncTool
             }
             #endregion
 
-
-            #region create a sheet service to connect to existing sheet in cloud.
+            #region CREATE SPREADSHEET'S SERVICE.
             SheetsService service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
@@ -71,8 +70,7 @@ namespace SheetSyncTool
             });
             #endregion
 
-
-            #region execute spreadsheet operations...
+            #region EXECUTE SPREADSHEET OPERATIONS.
             if (service != null && spreadSheetId != null && spreadSheetId != "")
             {
                 try
