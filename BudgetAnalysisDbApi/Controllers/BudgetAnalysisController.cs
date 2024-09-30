@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using BudgetAnalysisDbApi.Models;
+using BudgetAnalysisDbApi.DTO;
 
 namespace BudgetAnalysisDbApi.Controllers
 {
