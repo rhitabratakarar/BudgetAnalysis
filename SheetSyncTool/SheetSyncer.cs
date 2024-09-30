@@ -77,6 +77,8 @@ namespace SheetSyncTool
                 {
                     SpreadsheetsResource.ValuesResource.GetRequest sheetsRequest = service.Spreadsheets.Values.Get(spreadSheetId, rangeInSheet);
                     ValueRange values = await sheetsRequest.ExecuteAsync();
+
+                    // save the information in a variable.
                     Console.WriteLine(values);
                 }
                 catch (AggregateException exs)
@@ -87,6 +89,10 @@ namespace SheetSyncTool
                     }
                 }
             }
+            #endregion
+
+            #region INSERT INTO DATABASE.
+
             #endregion
 
             return;

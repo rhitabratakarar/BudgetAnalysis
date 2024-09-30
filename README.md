@@ -10,8 +10,12 @@ Note: The sheet ID and the database needs to be mentioned in the appsettings of 
 * Download the client secret file after creating the OAuth Client ID.
 * Once the download is complete, rename the file as 'client_secrets.json' and paste it in the project's directory.
 * Configure the appsettings.json for client secret path and other properties.
-* Run the tool. (make sure you have properly configured the connection string in the app config)
-* Details will be inserted into database after this.
+* Run the tool and details will be inserted into your local database.
+
+
+# BudgetAnalysisDbAPI
+
+* Configure the `appsettings.json` here for the connection string.
 
 
 # Authentication Datastore
