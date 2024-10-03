@@ -37,6 +37,7 @@ namespace SheetSyncTool
 
             UserCredential? credential = null;
 
+
             #region GENERATE VALID CREDENTIAL.
             if (CLIENT_SECRETS_FILE != null)
             {
@@ -57,10 +58,11 @@ namespace SheetSyncTool
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("ERROR: " + e.Message);
+                    Console.WriteLine("❌ ERROR: " + e.Message);
                 }
             }
             #endregion
+
 
             #region CREATE SPREADSHEET'S SERVICE.
             SheetsService service = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
@@ -70,7 +72,11 @@ namespace SheetSyncTool
             });
             #endregion
 
+
             #region EXECUTE SPREADSHEET OPERATIONS.
+
+            IList<IList<object>> contentToSend;
+
             if (service != null && spreadSheetId != null && spreadSheetId != "")
             {
                 try
@@ -78,21 +84,45 @@ namespace SheetSyncTool
                     SpreadsheetsResource.ValuesResource.GetRequest sheetsRequest = service.Spreadsheets.Values.Get(spreadSheetId, rangeInSheet);
                     ValueRange values = await sheetsRequest.ExecuteAsync();
 
-                    // save the information in a variable.
-                    Console.WriteLine(values);
+                    contentToSend = values.Values;
                 }
                 catch (AggregateException exs)
                 {
                     foreach (Exception e in exs.InnerExceptions)
                     {
-                        Console.WriteLine("ERROR: " + e.Message);
+                        Console.WriteLine("❌ ERROR: " + e.Message);
                     }
                 }
             }
             #endregion
 
+
+            #region FORMAT CONTENT FOR SENDING
+
+            string formattedContentToSend = "";
+            // extra logics to be added here.
+
+            #endregion
+
+
             #region INSERT INTO DATABASE.
 
+            if (formattedContentToSend != "")
+            {
+                HttpClient client = new HttpClient();
+                StringContent stringContent = new StringContent(formattedContentToSend);
+
+                HttpResponseMessage response = await client.PostAsync(this.configuration["DbAPIUrl"], stringContent);
+
+                if (response.IsSuccessStatusCode)
+                    Console.WriteLine("Received 200 status code! OK. 👍");
+                else
+                    Console.WriteLine("❌ Something is not correct! Debug the solution.");
+            }
+            else
+            {
+                Console.WriteLine("content is missing 😵‍💫. Debug to find it out 😓");
+            }
             #endregion
 
             return;
