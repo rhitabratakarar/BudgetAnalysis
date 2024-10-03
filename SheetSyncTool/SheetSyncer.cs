@@ -117,7 +117,7 @@ namespace SheetSyncTool
                 if (response.IsSuccessStatusCode)
                     Console.WriteLine("Received 200 status code! OK. 👍");
                 else
-                    Console.WriteLine("❌ Something is not correct! Debug the solution.");
+                    Console.WriteLine("❌ Success status not received. Debug to find out.");
             }
             else
             {
