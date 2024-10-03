@@ -3,6 +3,7 @@ using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Util.Store;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace SheetSyncTool
 {
@@ -33,7 +34,7 @@ namespace SheetSyncTool
         {
             string CLIENT_SECRETS_FILE = this.configuration["ClientSecretFile"]!;
             string spreadSheetId = this.configuration["SheetID"]!;
-            string rangeInSheet = this.configuration["SheetColumnRange"]!;
+            string rangeInSheet = this.configuration["SheetName"]! + "!" + this.configuration["SheetColumnRange"]!;
 
             UserCredential? credential = null;
 
@@ -54,11 +55,11 @@ namespace SheetSyncTool
                 }
                 catch (FileNotFoundException fileNotFoundException)
                 {
-                    Console.WriteLine(fileNotFoundException.Message + "<The passed file is absent from the directory>");
+                    throw new FileNotFoundException(fileNotFoundException.Message);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("❌ ERROR: " + e.Message);
+                    throw new Exception("❌ ERROR: " + e.Message);
                 }
             }
             #endregion
@@ -75,7 +76,7 @@ namespace SheetSyncTool
 
             #region EXECUTE SPREADSHEET OPERATIONS.
 
-            IList<IList<object>> contentToSend;
+            IList<IList<object>> contentToSend = new List<IList<object>>();
 
             if (service != null && spreadSheetId != null && spreadSheetId != "")
             {
@@ -92,15 +93,31 @@ namespace SheetSyncTool
                     {
                         Console.WriteLine("❌ ERROR: " + e.Message);
                     }
+                    return;
                 }
             }
             #endregion
 
 
-            #region FORMAT CONTENT FOR SENDING
+            #region FORMAT CONTENT BEFORE SENDING
 
             string formattedContentToSend = "";
-            // extra logics to be added here.
+            
+            if (contentToSend != null)
+            {
+                IDictionary<string, string> dictionaryContent = new Dictionary<string, string>()
+                {
+                    {"Year", this.configuration["SheetYear"]!},
+                    {"Month", this.configuration["SheetName"]!},
+                    {"SheetColumnRange", this.configuration["SheetColumnRange"]! },
+                    {"ReceivedDataFromGCloud", JsonSerializer.Serialize(contentToSend) }
+                };
+                formattedContentToSend = JsonSerializer.Serialize(dictionaryContent);
+            }
+            else
+            {
+                throw new Exception("❌ Received Empty content from GCloud.");
+            }
 
             #endregion
 
@@ -117,11 +134,11 @@ namespace SheetSyncTool
                 if (response.IsSuccessStatusCode)
                     Console.WriteLine("Received 200 status code! OK. 👍");
                 else
-                    Console.WriteLine("❌ Success status not received. Debug to find out.");
+                    throw new Exception("❌ Success status not received. Debug to find out.");
             }
             else
             {
-                Console.WriteLine("content is missing 😵‍💫. Debug to find it out 😓");
+                throw new Exception("Content is missing 😵‍💫. Debug to find it out 😓");
             }
             #endregion
 
