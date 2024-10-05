@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetAnalysisDbApi", "Budg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetSyncTool", "SheetSyncTool\SheetSyncTool.csproj", "{AA9403E8-DAC9-4121-A8D9-3FB6ADCCD45C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetSyncTool.UnitTests", "SheetSyncTool.UnitTests\SheetSyncTool.UnitTests.csproj", "{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetSyncTool.UnitTests", "SheetSyncTool.UnitTests\SheetSyncTool.UnitTests.csproj", "{2B74FACF-C58C-41D5-85E8-DD3CE10B9506}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{283D47C7-FDD9-4439-9E68-4B5BB9FAD017}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

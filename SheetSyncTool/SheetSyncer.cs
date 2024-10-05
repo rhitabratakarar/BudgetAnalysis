@@ -3,6 +3,7 @@ using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Util.Store;
 using Microsoft.Extensions.Configuration;
+using System.Text;
 using System.Text.Json;
 
 namespace SheetSyncTool
@@ -101,18 +102,15 @@ namespace SheetSyncTool
 
             #region FORMAT CONTENT BEFORE SENDING
 
-            string formattedContentToSend = "";
-            
+            IDictionary<string, IList<IList<object>>> formattedContentToSend = new Dictionary<string, IList<IList<object>>>();
+
             if (contentToSend != null)
             {
-                IDictionary<string, string> dictionaryContent = new Dictionary<string, string>()
-                {
-                    {"Year", this.configuration["SheetYear"]!},
-                    {"Month", this.configuration["SheetName"]!},
-                    {"SheetColumnRange", this.configuration["SheetColumnRange"]! },
-                    {"ReceivedDataFromGCloud", JsonSerializer.Serialize(contentToSend) }
-                };
-                formattedContentToSend = JsonSerializer.Serialize(dictionaryContent);
+                contentToSend.Insert(0, new List<object>() { "Year", this.configuration["SheetYear"]! });
+                contentToSend.Insert(1, new List<object>() { "Month", this.configuration["SheetName"]! });
+                contentToSend.Insert(2, new List<object>() { "SheetColumnRange", this.configuration["SheetColumnRange"]! });
+
+                formattedContentToSend.Add("InsertionData", contentToSend);
             }
             else
             {
@@ -124,12 +122,15 @@ namespace SheetSyncTool
 
             #region INSERT INTO DATABASE.
 
-            if (formattedContentToSend != "")
+            if (formattedContentToSend != null)
             {
                 HttpClient client = new HttpClient();
-                StringContent stringContent = new StringContent(formattedContentToSend);
 
-                HttpResponseMessage response = await client.PostAsync(this.configuration["DbAPIUrl"], stringContent);
+                StringContent stringContent = new StringContent(JsonSerializer.Serialize(formattedContentToSend),
+                                                                    encoding: Encoding.UTF8,
+                                                                    "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(this.configuration["DataInsertionDbAPI"], stringContent);
 
                 if (response.IsSuccessStatusCode)
                     Console.WriteLine("Received 200 status code! OK. 👍");
