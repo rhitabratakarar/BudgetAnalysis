@@ -1,6 +1,7 @@
 # Usage and Setup:
 
-The `sheet sync tool` should run first to save the data from provided sheet ID into a provided database. Once the details have been saved, the `app-ui` project can then be executed.
+The `sheet sync tool` should run first to save the data from provided sheet ID into a provided database. 
+Once the details have been saved, the `app-ui` project can then be executed along with `BudgetAnalysisDbApi`.
 
 Note: The sheet ID and the database needs to be mentioned in the appsettings of `sheet sync tool`.
 
