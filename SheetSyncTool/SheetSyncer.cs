@@ -100,9 +100,9 @@ namespace SheetSyncTool
             #endregion
 
 
-            #region FORMAT CONTENT BEFORE SENDING
+            #region CONTENT MARSHALLING
 
-            IDictionary<string, IList<IList<object>>> formattedContentToSend = new Dictionary<string, IList<IList<object>>>();
+            IDictionary<string, IList<IList<object>>> marshalledContent = new Dictionary<string, IList<IList<object>>>();
 
             if (contentToSend != null)
             {
@@ -110,7 +110,7 @@ namespace SheetSyncTool
                 contentToSend.Insert(1, new List<object>() { "Month", this.configuration["SheetName"]! });
                 contentToSend.Insert(2, new List<object>() { "SheetColumnRange", this.configuration["SheetColumnRange"]! });
 
-                formattedContentToSend.Add("InsertionData", contentToSend);
+                marshalledContent.Add("InsertionData", contentToSend);
             }
             else
             {
@@ -122,11 +122,11 @@ namespace SheetSyncTool
 
             #region INSERT INTO DATABASE.
 
-            if (formattedContentToSend != null)
+            if (marshalledContent != null)
             {
                 HttpClient client = new HttpClient();
 
-                StringContent stringContent = new StringContent(JsonSerializer.Serialize(formattedContentToSend),
+                StringContent stringContent = new StringContent(JsonSerializer.Serialize(marshalledContent),
                                                                     encoding: Encoding.UTF8,
                                                                     "application/json");
 
