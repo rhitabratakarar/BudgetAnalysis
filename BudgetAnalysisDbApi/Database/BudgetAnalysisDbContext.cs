@@ -16,5 +16,10 @@ namespace BudgetAnalysisDbApi.Database
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(this._configuration.GetConnectionString("BudgetAnalysis"));
         }
+
+        public string ConStr()
+        {
+            return this._configuration.GetConnectionString("BudgetAnalysis");
+        }
     }
 }

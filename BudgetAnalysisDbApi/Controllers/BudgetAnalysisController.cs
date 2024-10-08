@@ -14,17 +14,17 @@ namespace BudgetAnalysisDbApi.Controllers
         private readonly ICustomLogger _logger;
         private readonly IConfiguration _configuration;
         private readonly IDataMarshaller _dataMarshaller;
-        private readonly DbContext _dbContext;
+        private readonly IDbService _dbService;
 
         public BudgetAnalysisController(ICustomLogger logger,
             IConfiguration configuration,
             IDataMarshaller dataMarshaller,
-            BudgetAnalysisDbContext dbContext)
+            IDbService dbService)
         {
             this._logger = logger;
             this._configuration = configuration;
             this._dataMarshaller = dataMarshaller;
-            this._dbContext = dbContext;
+            this._dbService = dbService;
             this._logger.LogInformation("BudgetAnalysisController Initialized!");
         }
 
@@ -43,7 +43,7 @@ namespace BudgetAnalysisDbApi.Controllers
         public string Test()
         {
             this._logger.LogInformation("Test action is called");
-            return "Test message from server!";
+            return this._dbService.GetConnectionString();
         }
     }
 }
