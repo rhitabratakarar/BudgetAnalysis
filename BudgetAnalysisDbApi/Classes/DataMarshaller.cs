@@ -38,7 +38,19 @@ namespace BudgetAnalysisDbApi.Classes
             {
                 string expenseType = row[headerColumnIndex];
                 string expenseCost = row[valueColumnIndex];
-                mappedData.Add(expenseType, expenseCost);
+
+                if (expenseType == "")
+                    continue;
+
+                if (expenseCost == "")
+                    expenseCost = Convert.ToString(0);
+
+                // add value to the same type if an existing is present
+                
+                if (mappedData.ContainsKey(expenseType))
+                    mappedData[expenseType] = mappedData[expenseType] + expenseCost;
+                else
+                    mappedData.Add(expenseType, expenseCost);
             }
 
             return mappedData;
