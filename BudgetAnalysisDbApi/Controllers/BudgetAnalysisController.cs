@@ -29,14 +29,17 @@ namespace BudgetAnalysisDbApi.Controllers
         }
 
         [HttpPost("[action]")]
-        public void InsertDataFromTool(InsertionDataRequest insertionDataRequest)
+        public bool InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
+            bool status = false;
+
             if (insertionDataRequest.InsertionData != null)
             {
                 SheetExpensesMarshalledData marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
-
-                // save to db.
+                status = this._dbService.SaveSyncToolData(marshalledData);
             }
+
+            return status;
         }
 
         [HttpGet("[action]")]
