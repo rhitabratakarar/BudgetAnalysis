@@ -19,7 +19,7 @@ namespace BudgetAnalysisDbApi.Database
 
         public string ConStr()
         {
-            return this._configuration.GetConnectionString("BudgetAnalysis");
+            return this._configuration.GetConnectionString("BudgetAnalysis")!;
         }
     }
 }
