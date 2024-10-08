@@ -11,27 +11,25 @@ namespace BudgetAnalysisDbApi.Controllers
     {
         private readonly ICustomLogger _logger;
         private readonly IConfiguration _configuration;
+        private readonly IDataMarshaller _dataMarshaller;
 
-        public BudgetAnalysisController(ICustomLogger logger, IConfiguration configuration)
+        public BudgetAnalysisController(ICustomLogger logger, IConfiguration configuration, IDataMarshaller dataMarshaller)
         {
             this._logger = logger;
             this._configuration = configuration;
+            this._dataMarshaller = dataMarshaller;
             this._logger.LogInformation("BudgetAnalysisController Initialized!");
         }
 
         [HttpPost("[action]")]
-        public async Task InsertDataFromTool(InsertionDataRequest insertionDataRequest)
+        public void InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
             if (insertionDataRequest.InsertionData != null)
             {
-                IDataExtractor dataExtractor = new GoogleSheetDataExtractor(insertionDataRequest.InsertionData);
+                IDictionary<string, string> marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
 
-                IDictionary<string, string> optionalExpenses = dataExtractor.GetColumnSpecificData("", "");
-                IDictionary<string, string> mandatoryExpenses = dataExtractor.GetColumnSpecificData("", "");
-
-                // now save to DB using db context.
+                // save to db.
             }
-            return;
         }
 
         [HttpGet("[action]")]
