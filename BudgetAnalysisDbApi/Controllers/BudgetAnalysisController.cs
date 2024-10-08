@@ -1,7 +1,9 @@
 ﻿using BudgetAnalysisDbApi.Classes;
+using BudgetAnalysisDbApi.Database;
 using BudgetAnalysisDbApi.DTO;
 using BudgetAnalysisDbApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudgetAnalysisDbApi.Controllers
 {
@@ -12,12 +14,17 @@ namespace BudgetAnalysisDbApi.Controllers
         private readonly ICustomLogger _logger;
         private readonly IConfiguration _configuration;
         private readonly IDataMarshaller _dataMarshaller;
+        private readonly DbContext _dbContext;
 
-        public BudgetAnalysisController(ICustomLogger logger, IConfiguration configuration, IDataMarshaller dataMarshaller)
+        public BudgetAnalysisController(ICustomLogger logger,
+            IConfiguration configuration,
+            IDataMarshaller dataMarshaller,
+            BudgetAnalysisDbContext dbContext)
         {
             this._logger = logger;
             this._configuration = configuration;
             this._dataMarshaller = dataMarshaller;
+            this._dbContext = dbContext;
             this._logger.LogInformation("BudgetAnalysisController Initialized!");
         }
 

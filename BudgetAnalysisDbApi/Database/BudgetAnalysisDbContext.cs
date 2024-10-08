@@ -2,7 +2,7 @@
 
 namespace BudgetAnalysisDbApi.Database
 {
-    public class BudgetAnalysisDbContext: DbContext
+    public class BudgetAnalysisDbContext : DbContext
     {
         private readonly IConfiguration _configuration;
 

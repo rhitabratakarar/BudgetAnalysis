@@ -28,13 +28,13 @@ namespace BudgetAnalysisDbApi.Classes
             return marshalledData;
         }
 
-        public IDictionary<string, string> GetExpensesMappings(string headerColumnName, string valueColumnName, 
+        public IDictionary<string, string> GetExpensesMappings(string headerColumnName, string valueColumnName,
             int headerColumnIndex, int valueColumnIndex, InsertionDataRequest insertionDataRequest)
         {
             IDictionary<string, string> mappedData = new Dictionary<string, string>() { };
-            
+
             // skipping the first 4 rows since they contains data other than expenses.
-            foreach(IList<string> row in insertionDataRequest.InsertionData!.Skip(4).ToList())
+            foreach (IList<string> row in insertionDataRequest.InsertionData!.Skip(4).ToList())
             {
                 string expenseType = row[headerColumnIndex];
                 string expenseCost = row[valueColumnIndex];
@@ -46,7 +46,7 @@ namespace BudgetAnalysisDbApi.Classes
                     expenseCost = Convert.ToString(0);
 
                 // add value to the same type if an existing is present
-                
+
                 if (mappedData.ContainsKey(expenseType))
                     mappedData[expenseType] = mappedData[expenseType] + expenseCost;
                 else
