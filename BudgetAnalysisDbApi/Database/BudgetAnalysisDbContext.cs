@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BudgetAnalysisDbApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudgetAnalysisDbApi.Database
 {
@@ -10,6 +11,9 @@ namespace BudgetAnalysisDbApi.Database
         {
             this._configuration = configuration;
         }
+
+        public DbSet<Year> Years { get; set; }
+        public DbSet<Month> Months { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
