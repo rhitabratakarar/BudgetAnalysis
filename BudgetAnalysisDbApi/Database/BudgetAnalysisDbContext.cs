@@ -14,6 +14,7 @@ namespace BudgetAnalysisDbApi.Database
 
         public DbSet<Year> Years { get; set; }
         public DbSet<Month> Months { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
