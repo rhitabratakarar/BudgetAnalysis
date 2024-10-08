@@ -2,7 +2,7 @@
 {
     public enum ExpenseType
     {
-        Mandatory,
-        Optional
+        Mandatory = 1,
+        Optional = 2
     }
 }
