@@ -26,7 +26,7 @@ namespace BudgetAnalysisDbApi.Controllers
         {
             if (insertionDataRequest.InsertionData != null)
             {
-                IDictionary<string, string> marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
+                SheetExpensesMarshalledData marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
 
                 // save to db.
             }

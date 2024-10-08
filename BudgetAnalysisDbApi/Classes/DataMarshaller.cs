@@ -12,26 +12,36 @@ namespace BudgetAnalysisDbApi.Classes
             this._configuration = configuration;
         }
 
-        public IDictionary<string, string> GetData(InsertionDataRequest insertionDataRequest)
+        public SheetExpensesMarshalledData GetData(InsertionDataRequest insertionDataRequest)
         {
-            IDictionary<string, string> marshalledData = new Dictionary<string, string>()
-            {
-                {"Year", insertionDataRequest.InsertionData![0][1] },
-                {"Month", insertionDataRequest.InsertionData![1][1] },
-                {"SheetColumnRange", insertionDataRequest.InsertionData![2][1] }
-            };
-
             IList<string> sheetHeaders = insertionDataRequest.InsertionData![3];
 
-            IDictionary<string, string> mandatoryExpenses = GetColumnSpecificData(sheetHeaders[0], sheetHeaders[1], 0, 1);
-            IDictionary<string, string> optionalExpenses = GetColumnSpecificData(sheetHeaders[6], sheetHeaders[7], 6, 7);
-
+            SheetExpensesMarshalledData marshalledData = new SheetExpensesMarshalledData()
+            {
+                Year = insertionDataRequest.InsertionData![0][1],
+                Month = insertionDataRequest.InsertionData![1][1],
+                SheetColumnRange = insertionDataRequest.InsertionData![2][1],
+                SheetHeaders = sheetHeaders,
+                MandatoryExpenses = GetExpensesMappings(sheetHeaders[0], sheetHeaders[1], 0, 1, insertionDataRequest),
+                OptionalExpenses = GetExpensesMappings(sheetHeaders[6], sheetHeaders[7], 6, 7, insertionDataRequest)
+            };
             return marshalledData;
         }
 
-        public IDictionary<string, string> GetColumnSpecificData(string headerColumn, string valueColumn, int headerColumnIndex, int valueColumnIndex)
+        public IDictionary<string, string> GetExpensesMappings(string headerColumnName, string valueColumnName, 
+            int headerColumnIndex, int valueColumnIndex, InsertionDataRequest insertionDataRequest)
         {
-            throw new NotImplementedException();
+            IDictionary<string, string> mappedData = new Dictionary<string, string>() { };
+            
+            // skipping the first 4 rows since they contains data other than expenses.
+            foreach(IList<string> row in insertionDataRequest.InsertionData!.Skip(4).ToList())
+            {
+                string expenseType = row[headerColumnIndex];
+                string expenseCost = row[valueColumnIndex];
+                mappedData.Add(expenseType, expenseCost);
+            }
+
+            return mappedData;
         }
     }
 }

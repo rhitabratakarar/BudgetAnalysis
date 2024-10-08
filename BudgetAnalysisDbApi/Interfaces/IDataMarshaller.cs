@@ -1,9 +1,10 @@
-﻿using BudgetAnalysisDbApi.DTO;
+﻿using BudgetAnalysisDbApi.Classes;
+using BudgetAnalysisDbApi.DTO;
 
 namespace BudgetAnalysisDbApi.Interfaces
 {
     public interface IDataMarshaller
     {
-        public IDictionary<string, string> GetData(InsertionDataRequest insertionDataRequest);
+        public SheetExpensesMarshalledData GetData(InsertionDataRequest insertionDataRequest);
     }
 }
