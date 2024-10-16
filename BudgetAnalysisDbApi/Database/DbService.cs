@@ -20,39 +20,50 @@ namespace BudgetAnalysisDbApi.Database
             return this._configuration.GetConnectionString("BudgetAnalysis")!;
         }
 
+        /// <summary>
+        /// This method saves the sync tool data into database.
+        /// </summary>
+        /// <param name="marshalledData">Data object which has been marshalled from DataMarshaller</param>
+        /// <returns></returns>
         public async Task<bool> SaveSyncToolData(SheetExpensesMarshalledData marshalledData)
         {
             bool status = false;
 
             try
             {
-                // check whether a year is existing from marshalled data.
+                // check whether a year is existing in database.
+                
                 int yearToCheck = Convert.ToInt32(marshalledData.Year);
                 Year? existingYear = await this.dbContext.Years.FirstOrDefaultAsync(y => y.YearCode == yearToCheck);
-
+                
                 if (existingYear == null)
                 {
-                    // insert the newly added year into the database if it is not present.
-                    await this.dbContext.Years.AddAsync(new Year() { YearCode = yearToCheck });
+                    Year yearToInsert = new Year() { YearCode = yearToCheck };
+                    await this.dbContext.Years.AddAsync(yearToInsert);
+                    
+                    // save the changes to retrieve the id.
+                    await this.dbContext.SaveChangesAsync();
+
+                    existingYear = yearToInsert;
                 }
 
-                // check whether a month is existing from marshalled data.
+                // check whether a month is existing in database.
+
                 string monthToCheck = marshalledData.Month.Trim();
                 Month? existingMonth = await this.dbContext.Months.FirstOrDefaultAsync(m => m.MonthName == monthToCheck);
 
                 if (existingMonth == null)
                 {
-                    // insert the newly added month into the database if it is not present.
-                    await this.dbContext.Months.AddAsync(new Month() { MonthName = monthToCheck });
+                    Month monthToInsert = new Month() { MonthName = monthToCheck };
+                    await this.dbContext.Months.AddAsync(monthToInsert);
+
+                    // save the changes to retrieve the id.
+                    await this.dbContext.SaveChangesAsync();
+
+                    existingMonth = monthToInsert;
                 }
 
-        // todo: proceed with inserting in expenses
-
-                // get the month id
-
-                // get the year id
-
-                // insert into expenses table. No duplicates should be present, need to update every expense with its latest value.
+                // todo: proceed with inserting in expenses. No duplicates should be present, need to update every expense with its latest value.
 
                 await this.dbContext.SaveChangesAsync();
                 status = true;
