@@ -28,14 +28,14 @@ namespace BudgetAnalysisDbApi.Controllers
         }
 
         [HttpPost("[action]")]
-        public bool InsertDataFromTool(InsertionDataRequest insertionDataRequest)
+        public async Task<bool> InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
             bool status = false;
 
             if (insertionDataRequest.InsertionData != null)
             {
                 SheetExpensesMarshalledData marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
-                status = this._dbService.SaveSyncToolData(marshalledData);
+                status = await this._dbService.SaveSyncToolData(marshalledData);
             }
 
             return status;
