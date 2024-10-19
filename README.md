@@ -13,6 +13,7 @@ Note: The sheet ID and the database needs to be mentioned in the appsettings of 
 * Once the download is complete, rename the file as `client_secrets.json` and paste it in the project's directory.
 * Configure the `appsettings.json` for client secret path and other properties.
 * Run the tool and details will be inserted into your local database.
+* Careful while re-running this tool, since the data needs to be deleted first from the local database before inserting again.
 
 
 ## BudgetAnalysisDbAPI
