@@ -45,6 +45,8 @@ Note: The sheet ID and the database needs to be mentioned in the appsettings of 
 * Optional Expense Type (Column: G)
 * Optional Expense Cost (Column: F)
 
+**Note:** The column names can be different by not the positions.
+
 #### Worksheet:
 
 * A worksheet is named in the name of months.
