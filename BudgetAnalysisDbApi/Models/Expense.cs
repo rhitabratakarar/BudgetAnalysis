@@ -21,7 +21,7 @@ namespace BudgetAnalysisDbApi.Models
         public double ExpenseCost { get; set; }
 
         [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        // default date has been added to the migration with GETDATE().
+        // See Migration: AddCreatedDateToExpenseModel.
         public DateTime CreatedDate { get; set; }
     }
 }
