@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BudgetAnalysisDbApi.Models
@@ -18,5 +19,9 @@ namespace BudgetAnalysisDbApi.Models
 
         public ExpenseType ExpenseType { get; set; }
         public double ExpenseCost { get; set; }
+
+        [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        // default date has been added to the migration with GETDATE().
+        public DateTime CreatedDate { get; set; }
     }
 }

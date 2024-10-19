@@ -63,7 +63,7 @@ namespace BudgetAnalysisDbApi.Database
                     existingMonth = monthToInsert;
                 }
 
-                // todo: proceed with inserting in expenses. No duplicates should be present, need to update every expense with its latest value.
+                // todo: proceed with inserting in expenses. Fine with duplicates, it will show the insertion dates too.
 
                 await this.dbContext.SaveChangesAsync();
                 status = true;
