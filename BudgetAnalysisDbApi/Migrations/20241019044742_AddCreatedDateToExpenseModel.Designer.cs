@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetAnalysisDbApi.Migrations
 {
     [DbContext(typeof(BudgetAnalysisDbContext))]
-    [Migration("20241019035936_AddCreatedDateToExpenseModel")]
+    [Migration("20241019044742_AddCreatedDateToExpenseModel")]
     partial class AddCreatedDateToExpenseModel
     {
         /// <inheritdoc />

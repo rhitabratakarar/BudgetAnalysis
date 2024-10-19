@@ -20,8 +20,8 @@ namespace BudgetAnalysisDbApi.Models
         public ExpenseType ExpenseType { get; set; }
         public double ExpenseCost { get; set; }
 
-        [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        // See Migration: AddCreatedDateToExpenseModel.
         public DateTime CreatedDate { get; set; }
+
+        public string ExpenseName { get; set; }
     }
 }

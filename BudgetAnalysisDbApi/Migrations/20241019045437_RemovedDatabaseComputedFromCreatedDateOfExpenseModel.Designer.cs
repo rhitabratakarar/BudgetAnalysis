@@ -4,6 +4,7 @@ using BudgetAnalysisDbApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetAnalysisDbApi.Migrations
 {
     [DbContext(typeof(BudgetAnalysisDbContext))]
-    partial class BudgetAnalysisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241019045437_RemovedDatabaseComputedFromCreatedDateOfExpenseModel")]
+    partial class RemovedDatabaseComputedFromCreatedDateOfExpenseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,10 +38,6 @@ namespace BudgetAnalysisDbApi.Migrations
 
                     b.Property<double>("ExpenseCost")
                         .HasColumnType("float");
-
-                    b.Property<string>("ExpenseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExpenseType")
                         .HasColumnType("int");

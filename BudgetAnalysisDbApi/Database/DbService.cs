@@ -63,9 +63,38 @@ namespace BudgetAnalysisDbApi.Database
                     existingMonth = monthToInsert;
                 }
 
-                // todo: proceed with inserting in expenses. Fine with duplicates, it will show the insertion dates too.
+                IList<Expense> expenses = new List<Expense>();
 
+                foreach(KeyValuePair<string, string> expense in marshalledData.MandatoryExpenses)
+                {
+                    expenses.Add(new Expense()
+                    {
+                        Month = existingMonth,
+                        Year = existingYear,
+                        ExpenseType = ExpenseType.Mandatory,
+                        ExpenseCost = Convert.ToDouble(expense.Value),
+                        CreatedDate = DateTime.Now,
+                        ExpenseName = expense.Key
+                    });
+                }
+
+                foreach (KeyValuePair<string, string> expense in marshalledData.OptionalExpenses)
+                {
+                    expenses.Add(new Expense()
+                    {
+                        Month = existingMonth,
+                        Year = existingYear,
+                        ExpenseType = ExpenseType.Optional,
+                        ExpenseCost = Convert.ToDouble(expense.Value),
+                        CreatedDate = DateTime.Now,
+                        ExpenseName = expense.Key
+                    });
+                }
+
+                await this.dbContext.Expenses.AddRangeAsync(expenses);
+                
                 await this.dbContext.SaveChangesAsync();
+
                 status = true;
             }
             catch(Exception)
