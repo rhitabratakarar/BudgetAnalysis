@@ -26,62 +26,57 @@ export default function Navbar(props: IProps) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a
+              <button
                 className={`nav-link ${
                   Currentpage.Home === props.currentPage ? "active" : ""
                 }`}
                 onClick={() => props.setCurrentPage(Currentpage.Home)}
-                role="button"
               >
                 Home
-              </a>
+              </button>
             </li>
             <li className="nav-item">
-              <a
+              <button
                 className={`nav-link ${
                   Currentpage.Insert === props.currentPage ? "active" : ""
                 }`}
                 onClick={() => props.setCurrentPage(Currentpage.Insert)}
-                role="button"
               >
                 Insert
-              </a>
+              </button>
             </li>
             <li className="nav-item">
-              <a
+              <button
                 className={`nav-link ${
                   Currentpage.Delete === props.currentPage ? "active" : ""
                 }`}
                 onClick={() => props.setCurrentPage(Currentpage.Delete)}
-                role="button"
               >
                 Delete
-              </a>
+              </button>
             </li>
             <li className="nav-item dropdown">
-              <a
+              <button
                 className={`nav-link dropdown-toggle ${
                   Currentpage.BulkOperations === props.currentPage
                     ? "active"
                     : ""
                 }`}
-                role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Bulk Operations
-              </a>
+              </button>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <button
                     className="dropdown-item"
                     onClick={() =>
                       props.setCurrentPage(Currentpage.BulkOperations)
                     }
-                    role="button"
                   >
                     Bulk Delete
-                  </a>
+                  </button>
                 </li>
               </ul>
             </li>
