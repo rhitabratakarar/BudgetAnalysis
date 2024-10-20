@@ -2,7 +2,7 @@ enum Currentpage {
   Home,
   Insert,
   Delete,
-  BulkOperations,
+  BulkDelete,
 }
 
 export default Currentpage;

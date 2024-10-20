@@ -58,7 +58,7 @@ export default function Navbar(props: IProps) {
             <li className="nav-item dropdown">
               <button
                 className={`nav-link dropdown-toggle ${
-                  Currentpage.BulkOperations === props.currentPage
+                  Currentpage.BulkDelete === props.currentPage
                     ? "active"
                     : ""
                 }`}
@@ -72,7 +72,7 @@ export default function Navbar(props: IProps) {
                   <button
                     className="dropdown-item"
                     onClick={() =>
-                      props.setCurrentPage(Currentpage.BulkOperations)
+                      props.setCurrentPage(Currentpage.BulkDelete)
                     }
                   >
                     Bulk Delete
