@@ -7,7 +7,7 @@ interface IProps {
 
 export default function Navbar(props: IProps) {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           Budget Analysis UI
