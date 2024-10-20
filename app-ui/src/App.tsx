@@ -6,28 +6,20 @@ import Home from "./components/Home";
 import Insert from "./components/Insert";
 import Delete from "./components/Delete";
 import BulkDelete from "./components/BulkOperations/BulkDelete";
-
+import Empty from "./components/Empty/Empty";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState<Currentpage>(
     Currentpage.Home
   );
 
-  function getPageMapping(): React.ReactNode {
-    if (currentPage === Currentpage.Home)
-      return <Home />
-    if (currentPage === Currentpage.Insert)
-      return <Insert />
-    if (currentPage === Currentpage.Delete)
-      return <Delete />
-    if (currentPage === Currentpage.BulkDelete)
-      return <BulkDelete />
-  }
-
   return (
     <div className="App">
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      {getPageMapping()}
+      {currentPage === Currentpage.Home ? <Home /> : <Empty />}
+      {currentPage === Currentpage.Insert ? <Insert /> : <Empty />}
+      {currentPage === Currentpage.Delete ? <Delete /> : <Empty />}
+      {currentPage === Currentpage.BulkDelete ? <BulkDelete /> : <Empty />}
     </div>
   );
 }
