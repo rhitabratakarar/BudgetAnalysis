@@ -31,6 +31,7 @@ export default function Navbar(props: IProps) {
                   Currentpage.Home === props.currentPage ? "active" : ""
                 }`}
                 onClick={() => props.setCurrentPage(Currentpage.Home)}
+                role="button"
               >
                 Home
               </a>
@@ -41,6 +42,7 @@ export default function Navbar(props: IProps) {
                   Currentpage.Insert === props.currentPage ? "active" : ""
                 }`}
                 onClick={() => props.setCurrentPage(Currentpage.Insert)}
+                role="button"
               >
                 Insert
               </a>
@@ -76,6 +78,7 @@ export default function Navbar(props: IProps) {
                     onClick={() =>
                       props.setCurrentPage(Currentpage.BulkOperations)
                     }
+                    role="button"
                   >
                     Bulk Delete
                   </a>
