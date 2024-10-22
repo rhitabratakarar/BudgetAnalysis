@@ -1,4 +1,4 @@
-import Currentpage from "../Utils/CurrentPage";
+import Currentpage from "../../Utils/CurrentPage";
 
 interface IProps {
   currentPage: Currentpage;
@@ -7,7 +7,7 @@ interface IProps {
 
 export default function Navbar(props: IProps) {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm mb-3">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           Budget Analysis UI
