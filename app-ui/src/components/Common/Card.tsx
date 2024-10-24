@@ -1,6 +1,6 @@
 export default function Card() {
   return (
-    <div className="card shadow-sm mx-2 flex-shrink-0 mb-3 flex-grow-1" style={{ width: "18rem" }}>
+    <div className="card shadow-sm mx-2 flex-shrink-0 mb-3 flex-grow-1" style={{ width: "18rem", maxWidth: "18rem" }}>
       <img src="..." className="card-img-top" alt="" />
       <div className="card-body">
         <p className="card-text mb-2">
