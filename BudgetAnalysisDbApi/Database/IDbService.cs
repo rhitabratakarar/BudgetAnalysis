@@ -1,4 +1,5 @@
 ﻿using BudgetAnalysisDbApi.Classes;
+using BudgetAnalysisDbApi.Models;
 
 namespace BudgetAnalysisDbApi.Database
 {
@@ -6,5 +7,7 @@ namespace BudgetAnalysisDbApi.Database
     {
         public string GetConnectionString();
         public Task<bool> SaveSyncToolData(SheetExpensesMarshalledData marshalledData);
+        public Task<IList<Month>> GetMonthList();
+        public Task<IList<Year>> GetYearList();
     }
 }

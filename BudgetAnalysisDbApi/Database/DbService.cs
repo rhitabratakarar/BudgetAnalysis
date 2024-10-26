@@ -20,6 +20,18 @@ namespace BudgetAnalysisDbApi.Database
             return this._configuration.GetConnectionString("BudgetAnalysis")!;
         }
 
+        public async Task<IList<Month>> GetMonthList()
+        {
+            IList<Month> months = await this.dbContext.Months.ToListAsync();
+            return months;
+        }
+
+        public async Task<IList<Year>> GetYearList()
+        {
+            IList<Year> years = await this.dbContext.Years.ToListAsync();
+            return years;
+        }
+
         /// <summary>
         /// This method saves the sync tool data into database.
         /// </summary>

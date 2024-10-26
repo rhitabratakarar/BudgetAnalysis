@@ -2,6 +2,7 @@
 using BudgetAnalysisDbApi.Database;
 using BudgetAnalysisDbApi.DTO;
 using BudgetAnalysisDbApi.Interfaces;
+using BudgetAnalysisDbApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetAnalysisDbApi.Controllers
@@ -30,13 +31,15 @@ namespace BudgetAnalysisDbApi.Controllers
         [HttpGet("[action]")]
         public async Task<MonthListDTO> GetMonthList()
         {
-            throw new NotImplementedException();
+            IList<Month> months = await this._dbService.GetMonthList();
+            return new MonthListDTO() { Months = months };
         }
 
         [HttpGet("[action]")]
         public async Task<YearListDTO> GetYearList()
         {
-            throw new NotImplementedException();
+            IList<Year> years = await this._dbService.GetYearList();
+            return new YearListDTO() { Years = years };
         }
 
         [HttpPost("[action]")]
