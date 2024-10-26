@@ -27,6 +27,18 @@ namespace BudgetAnalysisDbApi.Controllers
             this._logger.LogInformation("BudgetAnalysisController Initialized!");
         }
 
+        [HttpGet("[action]")]
+        public async Task<MonthListDTO> GetMonthList()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<YearListDTO> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost("[action]")]
         public async Task<bool> InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
