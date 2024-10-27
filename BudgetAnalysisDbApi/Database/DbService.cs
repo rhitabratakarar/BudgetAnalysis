@@ -15,17 +15,29 @@ namespace BudgetAnalysisDbApi.Database
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Used as test, but can be useful sometimes to get the connection string.
+        /// </summary>
+        /// <returns></returns>
         public string GetConnectionString()
         {
             return this._configuration.GetConnectionString("BudgetAnalysis")!;
         }
 
+        /// <summary>
+        /// Get the list of months from the database
+        /// </summary>
+        /// <returns></returns>
         public async Task<IList<Month>> GetMonthList()
         {
             IList<Month> months = await this.dbContext.Months.ToListAsync();
             return months;
         }
 
+        /// <summary>
+        /// Get the list of years from the database
+        /// </summary>
+        /// <returns></returns>
         public async Task<IList<Year>> GetYearList()
         {
             IList<Year> years = await this.dbContext.Years.ToListAsync();
