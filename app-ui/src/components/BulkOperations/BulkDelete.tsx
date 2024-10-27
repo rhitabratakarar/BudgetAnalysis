@@ -57,7 +57,7 @@ export default function BulkDelete() {
         id="month-select"
         defaultValue={0}
       >
-        <option selected defaultValue={0}>
+        <option selected value={0}>
           Select Month
         </option>
         <option value="1">One</option>
