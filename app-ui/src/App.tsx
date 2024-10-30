@@ -7,6 +7,7 @@ import Insert from "./components/Insert";
 import Delete from "./components/Delete";
 import BulkDelete from "./components/BulkOperations/BulkDelete";
 import Empty from "./components/Empty/Empty";
+import Search from "./components/Search";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState<Currentpage>(
@@ -20,6 +21,7 @@ function App() {
       {currentPage === Currentpage.Insert ? <Insert /> : <Empty />}
       {currentPage === Currentpage.Delete ? <Delete /> : <Empty />}
       {currentPage === Currentpage.BulkDelete ? <BulkDelete /> : <Empty />}
+      {currentPage === Currentpage.Search ? <Search /> : <Empty />}
     </div>
   );
 }
