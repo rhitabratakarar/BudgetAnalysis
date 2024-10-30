@@ -90,7 +90,7 @@ export default function Navbar(props: IProps) {
             <input
               className="form-control me-2"
               type="search"
-              placeholder="Search a expense"
+              placeholder="Search an expense"
               aria-label="Search"
             />
             {props.currentPage === Currentpage.Search ? (
