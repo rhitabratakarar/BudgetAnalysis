@@ -85,7 +85,7 @@ export default function Navbar(props: IProps) {
             <input
               className="form-control me-2"
               type="search"
-              placeholder="Search a widget"
+              placeholder="Search a expense"
               aria-label="Search"
             />
             <button className="btn btn-outline-success" type="submit">
