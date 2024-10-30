@@ -3,6 +3,7 @@ enum Currentpage {
   Insert,
   Delete,
   BulkDelete,
+  Search
 }
 
 export default Currentpage;
