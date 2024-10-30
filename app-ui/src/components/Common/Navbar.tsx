@@ -6,6 +6,15 @@ interface IProps {
 }
 
 export default function Navbar(props: IProps) {
+
+  function closeSearchPage() {
+    props.setCurrentPage(Currentpage.Home);
+  }
+
+  function openSearchPage() {
+    props.setCurrentPage(Currentpage.Search);
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm mb-3">
       <div className="container-fluid">
@@ -58,9 +67,7 @@ export default function Navbar(props: IProps) {
             <li className="nav-item dropdown">
               <button
                 className={`nav-link dropdown-toggle ${
-                  Currentpage.BulkDelete === props.currentPage
-                    ? "active"
-                    : ""
+                  Currentpage.BulkDelete === props.currentPage ? "active" : ""
                 }`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -71,9 +78,7 @@ export default function Navbar(props: IProps) {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() =>
-                      props.setCurrentPage(Currentpage.BulkDelete)
-                    }
+                    onClick={() => props.setCurrentPage(Currentpage.BulkDelete)}
                   >
                     Bulk Delete
                   </button>
@@ -81,17 +86,23 @@ export default function Navbar(props: IProps) {
               </ul>
             </li>
           </ul>
-          <form className="d-flex" role="search">
+          <div className="d-flex" role="search">
             <input
               className="form-control me-2"
               type="search"
               placeholder="Search a expense"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
+            {props.currentPage === Currentpage.Search ? (
+              <button className="btn btn-outline-danger" onClick={closeSearchPage}>
+                Close
+              </button>
+            ) : (
+              <button className="btn btn-outline-success" onClick={openSearchPage}>
+                Search
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </nav>
