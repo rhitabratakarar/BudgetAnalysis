@@ -55,12 +55,30 @@ namespace BudgetAnalysisDbApi.Controllers
         [HttpPost("[action]")]
         public async Task<bool> InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
+            this._logger.LogInformation("InsertDataFromTool action method called.");
+
             bool status = false;
 
             if (insertionDataRequest.InsertionData != null)
             {
-                SheetExpensesMarshalledData marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
-                status = await this._dbService.SaveSyncToolData(marshalledData);
+                try
+                {
+                    this._logger.LogInformation("Trying to marshall insertion data request.");
+                    SheetExpensesMarshalledData marshalledData = this._dataMarshaller.GetData(insertionDataRequest);
+
+                    this._logger.LogInformation("Trying to call the db service to save data into the database");
+                    status = await this._dbService.SaveSyncToolData(marshalledData);
+                }
+                catch(Exception e)
+                {
+                    this._logger.LogError("ERROR: " + e.Message);
+                    this._logger.LogError("INNER EXCEPTION: " + e.InnerException?.Message);
+                    this._logger.LogError("STACK TRACE: " + e.StackTrace);
+                }
+            }
+            else
+            {
+                this._logger.LogWarning("Insertion Data request is found to be null");
             }
 
             return status;
