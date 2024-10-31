@@ -54,16 +54,6 @@ export default function Navbar(props: IProps) {
                 Insert
               </button>
             </li>
-            <li className="nav-item">
-              <button
-                className={`nav-link ${
-                  Currentpage.Delete === props.currentPage ? "active" : ""
-                }`}
-                onClick={() => props.setCurrentPage(Currentpage.Delete)}
-              >
-                Delete
-              </button>
-            </li>
             <li className="nav-item dropdown">
               <button
                 className={`nav-link dropdown-toggle ${

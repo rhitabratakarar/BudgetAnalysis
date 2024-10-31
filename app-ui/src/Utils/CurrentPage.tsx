@@ -1,7 +1,6 @@
 enum Currentpage {
   Home,
   Insert,
-  Delete,
   BulkDelete,
   Search
 }

@@ -69,7 +69,7 @@ export default function BulkDelete() {
         className="btn btn-danger shadow-sm"
         onClick={proceedForDeletion}
       >
-        Delete
+        Bulk Delete
       </button>
     </div>
   );
