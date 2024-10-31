@@ -8,7 +8,15 @@ class ApiService implements IApiService {
     this.serviceBase = serviceBase;
   }
 
-  getServiceResponse(serviceEndpoint: string): unknown {
+  async isServiceAvailable(testServiceEndpoint: string): Promise<boolean> {
+    const resp: Response = await fetch(new URL(testServiceEndpoint, this.serviceBase));
+    if (resp.status === 200)
+      return true;
+    else
+      return false;
+  }
+
+  async getServiceResponse(serviceEndpoint: string): Promise<unknown> {
     throw new Error("Method not implemented.");
   }
 }
