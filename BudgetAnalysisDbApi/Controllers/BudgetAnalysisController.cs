@@ -42,6 +42,16 @@ namespace BudgetAnalysisDbApi.Controllers
             return new YearListDTO() { Years = years };
         }
 
+        [HttpGet("[action]")]
+        public IDictionary<string, ExpenseType> GetExpenseTypes()
+        {
+            return new Dictionary<string, ExpenseType>()
+            {
+                { "Mandatory", ExpenseType.Mandatory },
+                { "Optional", ExpenseType.Optional }
+            };
+        }
+
         [HttpPost("[action]")]
         public async Task<bool> InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
