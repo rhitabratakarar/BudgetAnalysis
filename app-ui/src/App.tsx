@@ -20,17 +20,37 @@ function App() {
 
   // initialize api service.
   React.useEffect(() => {
-    const apiServ: IApiService = new ApiService(config.HTTP_DbApiURL_Base);
+    const url: URL = new URL(
+      config.BudgetAnalysisApiController,
+      config.HTTP_DbApiURL_Base
+    );
+    const apiServ: IApiService = new ApiService(url.toString());
     setApiService(apiServ);
   }, []);
 
   return (
     <div className="App">
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      {currentPage === Currentpage.Home ? <Home apiService={apiService}/> : <Empty />}
-      {currentPage === Currentpage.Insert ? <Insert apiService={apiService} /> : <Empty />}
-      {currentPage === Currentpage.BulkDelete ? <BulkDelete apiService={apiService} /> : <Empty />}
-      {currentPage === Currentpage.Search ? <Search apiService={apiService} /> : <Empty />}
+      {currentPage === Currentpage.Home ? (
+        <Home apiService={apiService} />
+      ) : (
+        <Empty />
+      )}
+      {currentPage === Currentpage.Insert ? (
+        <Insert apiService={apiService} />
+      ) : (
+        <Empty />
+      )}
+      {currentPage === Currentpage.BulkDelete ? (
+        <BulkDelete apiService={apiService} />
+      ) : (
+        <Empty />
+      )}
+      {currentPage === Currentpage.Search ? (
+        <Search apiService={apiService} />
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 }
