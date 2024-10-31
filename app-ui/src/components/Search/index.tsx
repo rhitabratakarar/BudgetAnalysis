@@ -1,4 +1,10 @@
-export default function Search() {
+import IApiService from "../../Utils/IApiService";
+
+interface IProps {
+  apiService: IApiService;
+}
+
+export default function Search(props: IProps) {
   return (
     <div className="container-fluid">
       <table className="table table-bordered">

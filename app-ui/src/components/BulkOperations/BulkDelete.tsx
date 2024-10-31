@@ -1,7 +1,11 @@
 import { useEffect } from "react";
-import config from "../../config";
+import IApiService from "../../Utils/IApiService";
 
-export default function BulkDelete() {
+interface IProps {
+  apiService: IApiService;
+}
+
+export default function BulkDelete(props: IProps) {
   useEffect(() => {}, []);
 
   function proceedForDeletion() {

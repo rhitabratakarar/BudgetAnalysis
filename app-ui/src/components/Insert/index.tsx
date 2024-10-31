@@ -1,4 +1,10 @@
-export default function Insert() {
+import IApiService from "../../Utils/IApiService";
+
+interface IProps {
+  apiService: IApiService;
+}
+
+export default function Insert(props: IProps) {
   return (
     <div className="container-fluid">
       <select
