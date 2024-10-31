@@ -16,7 +16,7 @@ function App() {
     Currentpage.Home
   );
 
-  const [apiService, setApiService] = React.useState<IApiService>(new ApiService(""));
+  const [apiService, setApiService] = React.useState<IApiService>();
 
   // initialize api service.
   React.useEffect(() => {

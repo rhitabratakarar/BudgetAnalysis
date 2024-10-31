@@ -1,7 +1,7 @@
 import IApiService from "../../Utils/IApiService";
 
 interface IProps {
-  apiService: IApiService;
+  apiService: IApiService | undefined;
 }
 
 export default function Insert(props: IProps) {

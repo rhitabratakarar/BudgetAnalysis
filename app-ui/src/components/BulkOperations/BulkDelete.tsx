@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import IApiService from "../../Utils/IApiService";
 
 interface IProps {
-  apiService: IApiService;
+  apiService: IApiService | undefined;
 }
 
 export default function BulkDelete(props: IProps) {

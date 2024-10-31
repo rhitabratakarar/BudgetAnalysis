@@ -2,7 +2,7 @@ import IApiService from "../../Utils/IApiService";
 import Card from "../Common/Card";
 
 interface IProps {
-  apiService: IApiService;
+  apiService: IApiService | undefined;
 }
 
 export default function Home(props: IProps) {
