@@ -2,7 +2,11 @@ let config = {
     "IsHTTPSEnabled": false,
     "HTTP_DbApiURL_Base": "http://localhost:5263",
     "HTTPS_DbApiURL_Base": "https://localhost:7168",
-    "BudgetAnalysisApiController": "BudgetAnalysis"
+    "BudgetAnalysisApiController": "BudgetAnalysis",
+    "GetMonthListActionMethod": "GetMonthList",
+    "GetYearListActionMethod": "GetYearList",
+    "GetExpenseTypesActionMethod": "GetExpenseTypes",
+    "TestActionMethod": "Test"
 };
 
 export default config;
