@@ -1,13 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import IApiService from "../../Utils/IApiService";
+import config from "../../config";
+import IMonth from "../../Utils/IMonth";
+import IYear from "../../Utils/IYears";
+import IYearListDTO from "../../DTO/YearListDTO";
+import IMonthListDTO from "../../DTO/MonthListDTO";
 
 interface IProps {
   apiService: IApiService | undefined;
 }
 
 export default function BulkDelete(props: IProps) {
-  useEffect(() => {}, []);
+  const [yearsList, setYearsList] = useState<IYear[]>([]);
+  const [monthsList, setMonthsList] = useState<IMonth[]>([]);
 
+  useEffect(() => {
+    // fetch years and set
+    props.apiService
+      ?.getServiceResponse<IYearListDTO>(config.GetYearListActionMethod)
+      .then((data: IYearListDTO) => {
+        setYearsList(data.years);
+      })
+      .catch((reason) => {
+        alert("Error while getting Years List from db api: " + reason);
+      });
+
+    // fetch months and set
+    props.apiService
+      ?.getServiceResponse<IMonthListDTO>(config.GetMonthListActionMethod)
+      .then((data: IMonthListDTO) => {
+        setMonthsList(data.months);
+      })
+      .catch((reason) => {
+        alert("Error while getting Months List from db api: " + reason);
+      });
+  }, []);
+
+  /**
+   * Function to get name of year and month and send it to db api.
+   */
   function proceedForDeletion() {
     const monthSelectElement: HTMLSelectElement = document.getElementById(
       "month-select"
@@ -33,6 +64,11 @@ export default function BulkDelete(props: IProps) {
     }
   }
 
+  /**
+   * Method that request deletion to the database api.
+   * @param year The Year name which should be deleted.
+   * @param month The month name which should be deleted.
+   */
   async function sendDeletionRequest(year: string, month: string) {
     console.log(year, month);
   }
@@ -48,12 +84,16 @@ export default function BulkDelete(props: IProps) {
         id="year-select"
         defaultValue={0}
       >
-        <option selected value={0}>
+        <option value={0} key={0}>
           Select Year
         </option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        {yearsList?.map((year: IYear) => {
+          return (
+            <option id={year.id.toString()} key={year.id.toString()}>
+              {year.yearCode}
+            </option>
+          );
+        })}
       </select>
       <select
         className="form-select mb-3 w-25 shadow-sm"
@@ -61,12 +101,16 @@ export default function BulkDelete(props: IProps) {
         id="month-select"
         defaultValue={0}
       >
-        <option selected value={0}>
+        <option value={0} key={0}>
           Select Month
         </option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        {monthsList?.map((month: IMonth) => {
+          return (
+            <option id={month.id.toString()} key={month.id.toString()}>
+              {month.monthName}
+            </option>
+          );
+        })}
       </select>
       <button
         type="button"
