@@ -1,6 +1,6 @@
 interface IApiService {
     serviceBase: string;
-    getServiceResponse(serviceEndpoint: string): Promise<unknown>;
+    getServiceResponse<T>(serviceEndpoint: string): Promise<T>;
     isServiceAvailable(testServiceEndpoint: string): Promise<boolean>;
 }
 

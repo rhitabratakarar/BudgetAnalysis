@@ -25,7 +25,7 @@ class ApiService implements IApiService {
    * This method is used to get response from a connected api service.
    * @param serviceEndpoint Endpoint of service to which request should be made.
    */
-  async getServiceResponse(serviceEndpoint: string): Promise<unknown> {
+  async getServiceResponse<T>(serviceEndpoint: string): Promise<T> {
     throw new Error("Method not implemented.");
   }
 }
