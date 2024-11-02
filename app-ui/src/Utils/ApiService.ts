@@ -26,7 +26,8 @@ class ApiService implements IApiService {
    * @param serviceEndpoint Endpoint of service to which request should be made.
    */
   async getServiceResponse<T>(serviceEndpoint: string): Promise<T> {
-    throw new Error("Method not implemented.");
+    const response = await fetch(new URL(serviceEndpoint, this.serviceBase));
+    return response as T;
   }
 }
 
