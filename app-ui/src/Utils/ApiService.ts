@@ -26,8 +26,10 @@ class ApiService implements IApiService {
    * @param serviceEndpoint Endpoint of service to which request should be made.
    */
   async getServiceResponse<T>(serviceEndpoint: string): Promise<T> {
-    const response = await fetch(new URL(serviceEndpoint, this.serviceBase));
-    return response as T;
+    const response = await fetch(
+      new URL(this.serviceBase).href + "/" + serviceEndpoint
+    );
+    return (await response.json()) as T;
   }
 }
 
