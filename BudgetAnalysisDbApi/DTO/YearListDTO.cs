@@ -4,6 +4,6 @@ namespace BudgetAnalysisDbApi.DTO
 {
     public class YearListDTO
     {
-        public IList<Year> Years { get; set; }
+        public IList<Year>? Years { get; set; }
     }
 }

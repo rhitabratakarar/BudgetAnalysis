@@ -4,6 +4,6 @@ namespace BudgetAnalysisDbApi.DTO
 {
     public class MonthListDTO
     {
-        public IList<Month> Months { get; set; }
+        public IList<Month>? Months { get; set; }
     }
 }

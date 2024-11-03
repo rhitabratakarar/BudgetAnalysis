@@ -8,6 +8,6 @@ namespace BudgetAnalysisDbApi.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string MonthName { get; set; }
+        public string? MonthName { get; set; }
     }
 }
