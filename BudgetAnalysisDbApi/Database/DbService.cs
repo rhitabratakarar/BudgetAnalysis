@@ -56,15 +56,15 @@ namespace BudgetAnalysisDbApi.Database
             try
             {
                 // check whether a year is existing in database.
-                
+
                 int yearToCheck = Convert.ToInt32(marshalledData.Year);
                 Year? existingYear = await this.dbContext.Years.FirstOrDefaultAsync(y => y.YearCode == yearToCheck);
-                
+
                 if (existingYear == null)
                 {
                     Year yearToInsert = new Year() { YearCode = yearToCheck };
                     await this.dbContext.Years.AddAsync(yearToInsert);
-                    
+
                     // save the changes to retrieve the id.
                     await this.dbContext.SaveChangesAsync();
 
@@ -89,7 +89,7 @@ namespace BudgetAnalysisDbApi.Database
 
                 IList<Expense> expenses = new List<Expense>();
 
-                foreach(KeyValuePair<string, string> expense in marshalledData.MandatoryExpenses)
+                foreach (KeyValuePair<string, string> expense in marshalledData.MandatoryExpenses)
                 {
                     expenses.Add(new Expense()
                     {
@@ -116,12 +116,12 @@ namespace BudgetAnalysisDbApi.Database
                 }
 
                 await this.dbContext.Expenses.AddRangeAsync(expenses);
-                
+
                 await this.dbContext.SaveChangesAsync();
 
                 status = true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 status = false;
             }

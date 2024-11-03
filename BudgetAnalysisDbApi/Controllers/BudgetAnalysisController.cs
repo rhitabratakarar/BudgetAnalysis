@@ -69,7 +69,7 @@ namespace BudgetAnalysisDbApi.Controllers
                     this._logger.LogInformation("Trying to call the db service to save data into the database");
                     status = await this._dbService.SaveSyncToolData(marshalledData);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     this._logger.LogError("ERROR: " + e.Message);
                     this._logger.LogError("INNER EXCEPTION: " + e.InnerException?.Message);
