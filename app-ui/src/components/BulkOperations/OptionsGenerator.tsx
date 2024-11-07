@@ -2,18 +2,8 @@ import IMonth from "../../Utils/IMonth";
 import IYear from "../../Utils/IYears";
 
 export default class OptionsGenerator {
-  /**
-   * static method to generate list of <options> elements based on given array
-   * @param yearsList list of IYear
-   * @returns list of options based on IYear
-   */
-  static getYearsOptions(
-    yearsList: IYear[]
-  ): React.DetailedHTMLProps<
-    React.OptionHTMLAttributes<HTMLOptionElement>,
-    HTMLOptionElement
-  >[] {
-    let res = [];
+  static getYearsOptions(yearsList: IYear[]): any[] {
+    let res: any = [];
     for (let i: number = 0; i < yearsList.length; i++) {
       res.push(
         <option
@@ -28,18 +18,8 @@ export default class OptionsGenerator {
     return res;
   }
 
-  /**
-   * static method to generate list of <options> elements based on given array
-   * @param monthsList list of IMonth
-   * @returns list of options based on IMonth
-   */
-  static getMonthsOptions(
-    monthsList: IMonth[]
-  ): React.DetailedHTMLProps<
-    React.OptionHTMLAttributes<HTMLOptionElement>,
-    HTMLOptionElement
-  >[] {
-    let res = [];
+  static getMonthsOptions(monthsList: IMonth[]): any[] {
+    let res: any = [];
     for (let i: number = 0; i < monthsList.length; i++) {
       res.push(
         <option
