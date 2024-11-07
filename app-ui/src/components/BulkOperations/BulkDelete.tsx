@@ -73,6 +73,38 @@ export default function BulkDelete(props: IProps) {
     console.log(year, month);
   }
 
+  function getYearsOptions(): any[] {
+    let res: any = [];
+    for (let i: number = 0; i < yearsList.length; i++) {
+      res.push(
+        <option
+          id={yearsList[i].id.toString()}
+          key={yearsList[i].id.toString()}
+          value={i + 1}
+        >
+          {yearsList[i].yearCode.toString()}
+        </option>
+      );
+    }
+    return res;
+  }
+
+  function getMonthsOptions(): any[] {
+    let res: any = [];
+    for (let i: number = 0; i < monthsList.length; i++) {
+      res.push(
+        <option
+          id={monthsList[i].id.toString()}
+          key={monthsList[i].id.toString()}
+          value={i + 1}
+        >
+          {monthsList[i].monthName.toString()}
+        </option>
+      );
+    }
+    return res;
+  }
+
   return (
     <div className="container-fluid">
       <h6 className="mb-4">
@@ -87,13 +119,7 @@ export default function BulkDelete(props: IProps) {
         <option value={0} key={0}>
           Select Year
         </option>
-        {yearsList?.map((year: IYear) => {
-          return (
-            <option id={year.id.toString()} key={year.id.toString()}>
-              {year.yearCode}
-            </option>
-          );
-        })}
+        {getYearsOptions()}
       </select>
       <select
         className="form-select mb-3 w-25 shadow-sm"
@@ -104,13 +130,7 @@ export default function BulkDelete(props: IProps) {
         <option value={0} key={0}>
           Select Month
         </option>
-        {monthsList?.map((month: IMonth) => {
-          return (
-            <option id={month.id.toString()} key={month.id.toString()}>
-              {month.monthName}
-            </option>
-          );
-        })}
+        {getMonthsOptions()}
       </select>
       <button
         type="button"
