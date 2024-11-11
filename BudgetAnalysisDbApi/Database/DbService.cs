@@ -1,4 +1,5 @@
 ﻿using BudgetAnalysisDbApi.Classes;
+using BudgetAnalysisDbApi.Interfaces;
 using BudgetAnalysisDbApi.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,12 +8,14 @@ namespace BudgetAnalysisDbApi.Database
     public class DbService : IDbService
     {
         private readonly IConfiguration _configuration;
+        private readonly ICustomLogger _logger;
         private readonly BudgetAnalysisDbContext dbContext;
 
-        public DbService(IConfiguration configuration, BudgetAnalysisDbContext dbContext)
+        public DbService(IConfiguration configuration, BudgetAnalysisDbContext dbContext, ICustomLogger logger)
         {
             this._configuration = configuration;
             this.dbContext = dbContext;
+            this._logger = logger;
         }
 
         /// <summary>
