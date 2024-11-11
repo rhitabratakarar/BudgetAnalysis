@@ -31,14 +31,19 @@ namespace BudgetAnalysisDbApi.Controllers
         [HttpGet("[action]")]
         public async Task<MonthListDTO> GetMonthList()
         {
+            this._logger.LogInformation("GetMonthList called.");
             IList<Month> months = await this._dbService.GetMonthList();
+            this._logger.LogInformation("GetMonthList ended.");
+
             return new MonthListDTO() { Months = months };
         }
 
         [HttpGet("[action]")]
         public async Task<YearListDTO> GetYearList()
         {
+            this._logger.LogInformation("GetYearList called.");
             IList<Year> years = await this._dbService.GetYearList();
+            this._logger.LogInformation("GetYearList ended.");
             return new YearListDTO() { Years = years };
         }
 
@@ -57,8 +62,9 @@ namespace BudgetAnalysisDbApi.Controllers
         {
             // 1 = success
             // 0 = failure
-
+            this._logger.LogInformation("Initiating bulk deletion based on: " + dto.YearName + "/" + dto.MonthName);
             int status = await this._dbService.BulkUploadDelete(dto.YearName, dto.MonthName);
+            this._logger.LogInformation("Bulk deletion status: " + status);
             return status;
         }
 
