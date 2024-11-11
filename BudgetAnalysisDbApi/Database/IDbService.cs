@@ -9,5 +9,6 @@ namespace BudgetAnalysisDbApi.Database
         public Task<bool> SaveSyncToolData(SheetExpensesMarshalledData marshalledData);
         public Task<IList<Month>> GetMonthList();
         public Task<IList<Year>> GetYearList();
+        public Task<int> BulkUploadDelete(string yearName, string monthName);
     }
 }

@@ -45,6 +45,44 @@ namespace BudgetAnalysisDbApi.Database
         }
 
         /// <summary>
+        /// Delete every expense based on month and year.
+        /// </summary>
+        /// <param name="yearName">Name of the year to remove.</param>
+        /// <param name="monthName">Name of the month to remove.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<int> BulkUploadDelete(string yearName = "", string monthName = "")
+        {
+            int status = 0;
+
+            try
+            {
+                if (yearName == null || yearName == string.Empty)
+                    throw new Exception("ERROR: Received yearName as " + yearName);
+                if (monthName == null || monthName == string.Empty)
+                    throw new Exception("ERROR: Received monthName as " + monthName);
+
+                int yearCode = Convert.ToInt32(yearName);
+
+                IList<Expense> expensesToRemove = await (from expense in this.dbContext.Expenses
+                                                         join month in this.dbContext.Months on expense.MonthId equals month.Id
+                                                         join year in this.dbContext.Years on expense.YearId equals year.Id
+                                                         where year.YearCode == yearCode && month.MonthName == monthName
+                                                         select expense).ToListAsync();
+
+                this.dbContext.Expenses.RemoveRange(expensesToRemove);
+
+                await this.dbContext.SaveChangesAsync();
+                status = 1;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the information.
+            }
+            return status;
+        }
+
+        /// <summary>
         /// This method saves the sync tool data into database.
         /// </summary>
         /// <param name="marshalledData">Data object which has been marshalled from DataMarshaller</param>

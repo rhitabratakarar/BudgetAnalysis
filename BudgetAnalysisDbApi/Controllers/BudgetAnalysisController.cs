@@ -52,6 +52,16 @@ namespace BudgetAnalysisDbApi.Controllers
             };
         }
 
+        [HttpDelete("[action]")]
+        public async Task<int> BulkUploadDelete(BulkUploadDeleteDTO dto)
+        {
+            // 1 = success
+            // 0 = failure
+
+            int status = await this._dbService.BulkUploadDelete(dto.YearName, dto.MonthName);
+            return status;
+        }
+
         [HttpPost("[action]")]
         public async Task<bool> InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
