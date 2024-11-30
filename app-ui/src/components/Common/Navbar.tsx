@@ -34,7 +34,7 @@ export default function Navbar(props: IProps) {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            <li className="nav-item mx-2">
               <button
                 className={`nav-link ${
                   Currentpage.Home === props.currentPage ? "active" : ""
@@ -44,7 +44,7 @@ export default function Navbar(props: IProps) {
                 Home
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mx-2">
               <button
                 className={`nav-link ${
                   Currentpage.Insert === props.currentPage ? "active" : ""
@@ -54,7 +54,7 @@ export default function Navbar(props: IProps) {
                 Insert
               </button>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown mx-2">
               <button
                 className={`nav-link dropdown-toggle ${
                   Currentpage.BulkDelete === props.currentPage ? "active" : ""
@@ -78,7 +78,7 @@ export default function Navbar(props: IProps) {
           </ul>
           <div className="d-flex" role="search">
             <input
-              className="form-control me-2"
+              className="form-control mx-3"
               type="search"
               placeholder="Search an expense"
               aria-label="Search"

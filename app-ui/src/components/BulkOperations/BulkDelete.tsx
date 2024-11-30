@@ -76,7 +76,7 @@ export default function BulkDelete(props: IProps) {
 
   return (
     <div className="container-fluid">
-      <h6 className="mb-4">
+      <h6 className="my-4">
         <strong>Note: </strong>This operation is irreversible.
       </h6>
       <select
@@ -91,7 +91,7 @@ export default function BulkDelete(props: IProps) {
         {OptionsGenerator.getYearsOptions(yearsList)}
       </select>
       <select
-        className="form-select mb-3 w-25 shadow-sm"
+        className="form-select my-4 w-25 shadow-sm"
         aria-label="Month Select"
         id="month-select"
         defaultValue={0}
