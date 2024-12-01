@@ -17,6 +17,7 @@ function App() {
   );
 
   const [apiService, setApiService] = React.useState<IApiService>();
+  const [searchStatement, setSearchStatement] = React.useState<string>("");
 
   // initialize api service.
   React.useEffect(() => {
@@ -30,7 +31,11 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Navbar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        setSearchStatement={setSearchStatement}
+      />
       {currentPage === Currentpage.Home ? (
         <Home apiService={apiService} />
       ) : (
@@ -47,7 +52,7 @@ function App() {
         <Empty />
       )}
       {currentPage === Currentpage.Search ? (
-        <Search apiService={apiService} />
+        <Search apiService={apiService} searchStatement={searchStatement} />
       ) : (
         <Empty />
       )}

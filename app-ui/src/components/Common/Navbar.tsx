@@ -3,6 +3,7 @@ import Currentpage from "../../Utils/CurrentPage";
 interface IProps {
   currentPage: Currentpage;
   setCurrentPage: React.Dispatch<React.SetStateAction<Currentpage>>;
+  setSearchStatement: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function Navbar(props: IProps) {
@@ -12,6 +13,7 @@ export default function Navbar(props: IProps) {
   }
 
   function openSearchPage() {
+    props.setSearchStatement((document.getElementById("expenseSearch") as HTMLInputElement).value);
     props.setCurrentPage(Currentpage.Search);
   }
 
@@ -82,6 +84,7 @@ export default function Navbar(props: IProps) {
               type="search"
               placeholder="Search an expense"
               aria-label="Search"
+              id="expenseSearch"
             />
             {props.currentPage === Currentpage.Search ? (
               <button className="btn btn-outline-danger" onClick={closeSearchPage}>
