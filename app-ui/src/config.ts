@@ -6,7 +6,8 @@ let config = {
     "GetMonthListActionMethod": "GetMonthList",
     "GetYearListActionMethod": "GetYearList",
     "GetExpenseTypesActionMethod": "GetExpenseTypes",
-    "TestActionMethod": "Test"
+    "TestActionMethod": "Test",
+    "GetSearchResults": "GetSearchResults"
 };
 
 export default config;

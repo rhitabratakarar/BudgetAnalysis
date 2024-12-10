@@ -1,4 +1,5 @@
 ﻿using BudgetAnalysisDbApi.Classes;
+using BudgetAnalysisDbApi.DTO;
 using BudgetAnalysisDbApi.Interfaces;
 using BudgetAnalysisDbApi.Models;
 using Microsoft.EntityFrameworkCore;
@@ -168,6 +169,36 @@ namespace BudgetAnalysisDbApi.Database
             }
 
             return status;
+        }
+
+        /// <summary>
+        /// This method is used to query the database using a search term. The method primarily searches on expense name.
+        /// An improved method will be built later on over this query limiting more search specific options.
+        /// </summary>
+        /// <param name="searchQry">The string to query the database based on expense name</param>
+        /// <returns>The search result retrieved from the database.</returns>
+        public async Task<IList<SearchResults>> GetSearchResults(string searchQry)
+        {
+            IList<Expense> expenses = await this.dbContext.Expenses.Where(e => e.ExpenseName.Contains(searchQry))
+                .Include(e => e.Month)
+                .Include(e => e.Year)
+                .ToListAsync();
+
+            if (expenses.Count == 0)
+                return new List<SearchResults>();
+            else
+            {
+                IList<SearchResults> results = expenses.Select(e => new SearchResults()
+                {
+                    ExpenseCost = e.ExpenseCost,
+                    ExpenseName = e.ExpenseName,
+                    ExpenseType = (e.ExpenseType == ExpenseType.Mandatory)? "Mandatory" : "Optional",
+                    Month = e.Month.MonthName,
+                    Year = e.Year.YearCode
+                }).ToList();
+
+                return results;
+            }
         }
     }
 }

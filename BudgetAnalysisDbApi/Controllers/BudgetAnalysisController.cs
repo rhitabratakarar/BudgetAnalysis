@@ -28,6 +28,10 @@ namespace BudgetAnalysisDbApi.Controllers
             this._logger.LogInformation("BudgetAnalysisController Initialized!");
         }
 
+        /// <summary>
+        /// Method that will provide the list of months present in the database.
+        /// </summary>
+        /// <returns>The list of months which have been synced from database and present in local.</returns>
         [HttpGet("[action]")]
         public async Task<MonthListDTO> GetMonthList()
         {
@@ -38,6 +42,10 @@ namespace BudgetAnalysisDbApi.Controllers
             return new MonthListDTO() { Months = months };
         }
 
+        /// <summary>
+        /// Method that provides the list of years present in the database based on how it is synced.
+        /// </summary>
+        /// <returns>List of year codes in database.</returns>
         [HttpGet("[action]")]
         public async Task<YearListDTO> GetYearList()
         {
@@ -47,6 +55,10 @@ namespace BudgetAnalysisDbApi.Controllers
             return new YearListDTO() { Years = years };
         }
 
+        /// <summary>
+        /// Get the two(yet) types of expense types (Mandatory or Optional).
+        /// </summary>
+        /// <returns>Either Mandatory or Optional in dictionary</returns>
         [HttpGet("[action]")]
         public IDictionary<string, ExpenseType> GetExpenseTypes()
         {
@@ -57,6 +69,11 @@ namespace BudgetAnalysisDbApi.Controllers
             };
         }
 
+        /// <summary>
+        /// Used for deleting data in bulk upload.
+        /// </summary>
+        /// <param name="dto">year code and month name are the basis of deletion</param>
+        /// <returns>Integer to define whether the operation was success or failure.</returns>
         [HttpDelete("[action]")]
         public async Task<int> BulkUploadDelete(BulkUploadDeleteDTO dto)
         {
@@ -68,6 +85,11 @@ namespace BudgetAnalysisDbApi.Controllers
             return status;
         }
 
+        /// <summary>
+        /// Important method used by the sync tool to sync the excel changes and database.
+        /// </summary>
+        /// <param name="insertionDataRequest">Insertion data</param>
+        /// <returns>Boolean defining success or failure.</returns>
         [HttpPost("[action]")]
         public async Task<bool> InsertDataFromTool(InsertionDataRequest insertionDataRequest)
         {
@@ -100,11 +122,27 @@ namespace BudgetAnalysisDbApi.Controllers
             return status;
         }
 
+        /// <summary>
+        /// Test method, generally used to test the connection.
+        /// </summary>
+        /// <returns>returns a string to specify whether the service is up or not.</returns>
         [HttpGet("[action]")]
         public string Test()
         {
             this._logger.LogInformation("Test action is called");
             return this._dbService.GetConnectionString();
+        }
+
+        /// <summary>
+        /// Method to filter search results from UI via a search statement provided.
+        /// </summary>
+        /// <param name="searchStatement">string statement provided from the query.</param>
+        /// <returns>the list of search results to map with the table in UI</returns>
+        [HttpGet("[action]")]
+        public async Task<IList<SearchResults>> GetSearchResults([FromQuery]string searchStatement)
+        {
+            IList<SearchResults> results = await this._dbService.GetSearchResults(searchStatement);
+            return results;
         }
     }
 }
