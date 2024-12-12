@@ -24,10 +24,24 @@ class ApiService implements IApiService {
   /**
    * This method is used to get response from a connected api service.
    * @param serviceEndpoint Endpoint of service to which request should be made.
+   * @returns Promise<Response> as T
    */
   async getServiceResponse<T>(serviceEndpoint: string): Promise<T> {
     const response = await fetch(
       new URL(this.serviceBase).href + "/" + serviceEndpoint
+    );
+    return (await response.json()) as T;
+  }
+
+  /**
+   * This method is used to retrieve a response from a targetted service endpoint while sending query params in it.
+   * @param serviceEndpoint This is the request endpoint.
+   * @param queryParams This is the query params to send with the request.
+   * @returns Promise<Response> as T
+   */
+  async getServiceResponseWithQuery<T>(serviceEndpoint: string, queryParams: URLSearchParams): Promise<T> {
+    const response = await fetch(
+      new URL(this.serviceBase).href + "/" + serviceEndpoint + "?" + queryParams.toString()
     );
     return (await response.json()) as T;
   }
