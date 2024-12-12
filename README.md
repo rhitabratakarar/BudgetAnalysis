@@ -3,6 +3,8 @@
 The `sheet sync tool` should run first to save the data from provided sheet ID into a provided database. 
 Once the details have been saved, the `app-ui` project can then be executed along with `BudgetAnalysisDbApi`.
 
+Please configure the `appsettings.json` of both the project to use this backend.
+
 Note: The sheet ID and the database needs to be mentioned in the appsettings of `sheet sync tool`.
 
 
@@ -12,7 +14,7 @@ Note: The sheet ID and the database needs to be mentioned in the appsettings of 
 * Download the client secret file after creating the OAuth Client ID.
 * Once the download is complete, rename the file as `client_secrets.json` and paste it in the project's directory.
 * Configure the `appsettings.json` for client secret path and other properties.
-* Run the tool and details will be inserted into your local database.
+* Run this tool along with the database api to insert the details into your local database.
 * Careful while re-running this tool, since the data needs to be deleted first from the local database before inserting again.
 
 
