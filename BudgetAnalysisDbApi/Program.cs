@@ -1,6 +1,7 @@
 using BudgetAnalysisDbApi.Classes;
 using BudgetAnalysisDbApi.Database;
 using BudgetAnalysisDbApi.Interfaces;
+using BudgetAnalysisDbApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 
 app.UseAuthorization();
+
+app.UseRequestResponseLogging();
 
 // app.MapControllers();
 
