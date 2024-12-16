@@ -139,7 +139,7 @@ namespace BudgetAnalysisDbApi.Controllers
         /// <param name="searchStatement">string statement provided from the query.</param>
         /// <returns>the list of search results to map with the table in UI</returns>
         [HttpGet("[action]")]
-        public async Task<IList<SearchResults>> GetSearchResults([FromQuery]string searchStatement)
+        public async Task<IList<SearchResults>> GetSearchResults([FromQuery] string searchStatement)
         {
             IList<SearchResults> results = await this._dbService.GetSearchResults(searchStatement);
             return results;

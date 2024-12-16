@@ -192,7 +192,7 @@ namespace BudgetAnalysisDbApi.Database
                 {
                     ExpenseCost = e.ExpenseCost,
                     ExpenseName = e.ExpenseName,
-                    ExpenseType = (e.ExpenseType == ExpenseType.Mandatory)? "Mandatory" : "Optional",
+                    ExpenseType = (e.ExpenseType == ExpenseType.Mandatory) ? "Mandatory" : "Optional",
                     Month = e.Month.MonthName,
                     Year = e.Year.YearCode
                 }).ToList();
