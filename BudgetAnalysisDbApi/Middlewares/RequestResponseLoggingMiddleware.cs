@@ -1,25 +1,23 @@
-﻿using System.Globalization;
+﻿using BudgetAnalysisDbApi.Interfaces;
 
 namespace BudgetAnalysisDbApi.Middlewares
 {
     public class RequestResponseLoggingMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ICustomLogger _logger;
 
-        public RequestResponseLoggingMiddleware(RequestDelegate next)
+        public RequestResponseLoggingMiddleware(RequestDelegate next, ICustomLogger logger)
         {
-            _next = next;
+            this._next = next;
+            this._logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
-            // TODO: request response logging here
-
-            Console.WriteLine("Before Request");
-
+            this._logger.LogInformation("Received Request at + " + context.GetEndpoint());
             await _next(context);
-
-            Console.WriteLine("After request");
+            this._logger.LogInformation("Sending response status: " + context.Response.StatusCode);
         }
     }
 
