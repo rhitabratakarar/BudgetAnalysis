@@ -56,20 +56,6 @@ namespace BudgetAnalysisDbApi.Controllers
         }
 
         /// <summary>
-        /// Get the two(yet) types of expense types (Mandatory or Optional).
-        /// </summary>
-        /// <returns>Either Mandatory or Optional in dictionary</returns>
-        [HttpGet("[action]")]
-        public IDictionary<string, ExpenseType> GetExpenseTypes()
-        {
-            return new Dictionary<string, ExpenseType>()
-            {
-                { "Mandatory", ExpenseType.Mandatory },
-                { "Optional", ExpenseType.Optional }
-            };
-        }
-
-        /// <summary>
         /// Used for deleting data in bulk upload.
         /// </summary>
         /// <param name="dto">year code and month name are the basis of deletion</param>
