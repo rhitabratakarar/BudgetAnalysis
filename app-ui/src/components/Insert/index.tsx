@@ -45,9 +45,15 @@ export default function Insert(props: IProps) {
         aria-label="Year Select"
         defaultValue={0}
       >
-        <option value={0}>Select Year</option>
+        <option value={0} key={"year-0"}>
+          Select Year
+        </option>
         {yearList?.years.map((year: IYear) => {
-          return <option value={year.id}>{year.yearCode}</option>;
+          return (
+            <option value={year.id} key={`year-${year.id}`}>
+              {year.yearCode}
+            </option>
+          );
         })}
       </select>
       <select
@@ -55,9 +61,15 @@ export default function Insert(props: IProps) {
         aria-label="Month Select"
         defaultValue={0}
       >
-        <option value={0}>Select Month</option>
+        <option value={0} key={"month-0"}>
+          Select Month
+        </option>
         {monthList?.months.map((month: IMonth) => {
-          return <option value={month.id}>{month.monthName}</option>;
+          return (
+            <option value={month.id} key={`month-${month.id}`}>
+              {month.monthName}
+            </option>
+          );
         })}
       </select>
       <select
@@ -65,9 +77,21 @@ export default function Insert(props: IProps) {
         aria-label="Expense Type Select"
         defaultValue={0}
       >
-        <option value={0}>Select Expense type</option>
-        <option value={ExpenseType.Mandatory}>Mandatory</option>
-        <option value={ExpenseType.Optional}>Optional</option>
+        <option value={0} key={"expense-0"}>
+          Select Expense type
+        </option>
+        <option
+          value={ExpenseType.Mandatory}
+          key={`expense-${ExpenseType.Mandatory}`}
+        >
+          Mandatory
+        </option>
+        <option
+          value={ExpenseType.Optional}
+          key={`expense-${ExpenseType.Optional}`}
+        >
+          Optional
+        </option>
       </select>
       <div className="my-4 w-25">
         <label htmlFor="ExpenseName" className="form-label">
