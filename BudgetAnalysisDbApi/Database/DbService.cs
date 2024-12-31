@@ -200,5 +200,15 @@ namespace BudgetAnalysisDbApi.Database
                 return results;
             }
         }
+
+        /// <summary>
+        /// This method is used insert a single expense row to the database.
+        /// </summary>
+        /// <param name="expenseDTO">the dto consisting of the transfer data to insert into database.</param>
+        /// <returns>boolean (true for success, false for failure)</returns>
+        public async Task<bool> InsertSingleExpense(ExpenseDTO expenseDTO)
+        {
+            return false;
+        }
     }
 }

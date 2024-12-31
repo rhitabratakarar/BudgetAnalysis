@@ -4,6 +4,7 @@ using BudgetAnalysisDbApi.DTO;
 using BudgetAnalysisDbApi.Interfaces;
 using BudgetAnalysisDbApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace BudgetAnalysisDbApi.Controllers
 {
@@ -129,6 +130,24 @@ namespace BudgetAnalysisDbApi.Controllers
         {
             IList<SearchResults> results = await this._dbService.GetSearchResults(searchStatement);
             return results;
+        }
+
+        /// <summary>
+        /// This action method is used to insert a single expense row from UI.
+        /// </summary>
+        /// <param name="expenseDTO">The transfer object received from the frontend</param>
+        /// <returns>integer status code (200 for success, 406 for failure)</returns>
+        [HttpPost]
+        public async Task<int> InsertSingleExpense([FromBody]ExpenseDTO expenseDTO)
+        {
+            bool status = false;
+
+            status = await this._dbService.InsertSingleExpense(expenseDTO);
+
+            if (status == true)
+                return StatusCodes.Status200OK;
+            else
+                return StatusCodes.Status406NotAcceptable;
         }
     }
 }
