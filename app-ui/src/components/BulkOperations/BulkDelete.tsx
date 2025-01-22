@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import IApiService from "../../Utils/IApiService";
 import config from "../../config";
 import IMonth from "../../Utils/IMonth";
-import IYear from "../../Utils/IYears";
-import IYearListDTO from "../../DTO/YearListDTO";
-import IMonthListDTO from "../../DTO/MonthListDTO";
+import IYear from "../../Utils/IYear";
+import IYearListDTO from "../../DTO/IYearListDTO";
+import IMonthListDTO from "../../DTO/IMonthListDTO";
 import OptionsGenerator from "./OptionsGenerator";
 
 interface IProps {

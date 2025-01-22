@@ -1,5 +1,5 @@
 import IMonth from "../../Utils/IMonth";
-import IYear from "../../Utils/IYears";
+import IYear from "../../Utils/IYear";
 
 export default class OptionsGenerator {
   static getYearsOptions(yearsList: IYear[]): any[] {
