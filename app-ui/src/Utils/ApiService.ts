@@ -39,9 +39,32 @@ class ApiService implements IApiService {
    * @param queryParams This is the query params to send with the request.
    * @returns Promise<Response> as T
    */
-  async getServiceResponseWithQuery<T>(serviceEndpoint: string, queryParams: URLSearchParams): Promise<T> {
+  async getServiceResponseWithQuery<T>(
+    serviceEndpoint: string,
+    queryParams: URLSearchParams
+  ): Promise<T> {
     const response = await fetch(
-      new URL(this.serviceBase).href + "/" + serviceEndpoint + "?" + queryParams.toString()
+      new URL(this.serviceBase).href +
+        "/" +
+        serviceEndpoint +
+        "?" +
+        queryParams.toString()
+    );
+    return (await response.json()) as T;
+  }
+/**
+ * This method is used to post a request to the api endpoint
+ * @param serviceEndpoint The api endpoint to post the request
+ * @param body The Form Data body to post to the server.
+ * @returns Promise<T> as Response
+ */
+  async postServiceRequestWithBody<T>(
+    serviceEndpoint: string,
+    body: FormData
+  ): Promise<T> {
+    const response = await fetch(
+      new URL(this.serviceBase).href + "/" + serviceEndpoint,
+      { method: "POST", body: body }
     );
     return (await response.json()) as T;
   }

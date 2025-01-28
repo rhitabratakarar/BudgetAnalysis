@@ -6,6 +6,7 @@ import IMonthListDTO from "../../DTO/IMonthListDTO";
 import { ExpenseType } from "../../Utils/ExpenseType";
 import IYear from "../../Utils/IYear";
 import IMonth from "../../Utils/IMonth";
+import SingleExpenseInsertDTO from "../../DTO/SingleExpenseInsertDTO";
 
 interface IProps {
   apiService: IApiService | undefined;
@@ -38,12 +39,44 @@ export default function Insert(props: IProps) {
     });
   }, []);
 
+  function insertExpense() {
+    const yearID: string = (
+      document.getElementById("year-select") as HTMLSelectElement
+    ).value;
+    const monthID: string = (
+      document.getElementById("month-select") as HTMLSelectElement
+    ).value;
+    const expenseTypeID: string = (
+      document.getElementById("expense-type-select") as HTMLSelectElement
+    ).value;
+    const expenseName: string = (
+      document.getElementById("expense-name-input") as HTMLInputElement
+    ).value;
+    const expenseCost: string = (
+      document.getElementById("expense-cost-input") as HTMLInputElement
+    ).value;
+
+    // structure the dto
+    const singleExpenseInsertDTO: SingleExpenseInsertDTO =
+      new SingleExpenseInsertDTO(
+        yearID,
+        monthID,
+        expenseTypeID,
+        expenseName,
+        expenseCost
+      );
+
+    // call the api service
+    console.log(singleExpenseInsertDTO);
+  }
+
   return (
     <div className="container-fluid">
       <select
         className="form-select my-4 w-25 shadow-sm"
         aria-label="Year Select"
         defaultValue={0}
+        id="year-select"
       >
         <option value={0} key={"year-0"}>
           Select Year
@@ -60,6 +93,7 @@ export default function Insert(props: IProps) {
         className="form-select my-4 w-25 shadow-sm"
         aria-label="Month Select"
         defaultValue={0}
+        id="month-select"
       >
         <option value={0} key={"month-0"}>
           Select Month
@@ -76,6 +110,7 @@ export default function Insert(props: IProps) {
         className="form-select my-4 w-25 shadow-sm"
         aria-label="Expense Type Select"
         defaultValue={0}
+        id="expense-type-select"
       >
         <option value={0} key={"expense-0"}>
           Select Expense type
@@ -94,26 +129,30 @@ export default function Insert(props: IProps) {
         </option>
       </select>
       <div className="my-4 w-25">
-        <label htmlFor="ExpenseName" className="form-label">
+        <label htmlFor="expense-name-input" className="form-label">
           Expense Name
         </label>
         <input
           type="text"
           className="form-control shadow-sm"
-          id="ExpenseName"
+          id="expense-name-input"
         />
       </div>
       <div className="my-4 w-25">
-        <label htmlFor="ExpenseCost" className="form-label">
+        <label htmlFor="expense-cost-input" className="form-label">
           Expense Cost
         </label>
         <input
           type="number"
           className="form-control shadow-sm"
-          id="ExpenseCost"
+          id="expense-cost-input"
         />
       </div>
-      <button type="button" className="btn btn-success shadow-sm">
+      <button
+        type="button"
+        className="btn btn-success shadow-sm"
+        onClick={insertExpense}
+      >
         Insert
       </button>
     </div>
