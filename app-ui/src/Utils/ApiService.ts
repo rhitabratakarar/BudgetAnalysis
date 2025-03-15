@@ -52,12 +52,12 @@ class ApiService implements IApiService {
     );
     return (await response.json()) as T;
   }
-/**
- * This method is used to post a request to the api endpoint
- * @param serviceEndpoint The api endpoint to post the request
- * @param body The Form Data body to post to the server.
- * @returns Promise<T> as Response
- */
+  /**
+   * This method is used to post a request to the api endpoint
+   * @param serviceEndpoint The api endpoint to post the request
+   * @param body The Form Data body to post to the server.
+   * @returns Promise<T> as Response
+   */
   async postServiceRequestWithBody<T>(
     serviceEndpoint: string,
     body: FormData
@@ -65,6 +65,27 @@ class ApiService implements IApiService {
     const response = await fetch(
       new URL(this.serviceBase).href + "/" + serviceEndpoint,
       { method: "POST", body: body }
+    );
+    return (await response.json()) as T;
+  }
+
+  /**
+   * This method is used to send a delete request to the api endpoint
+   * @param serviceEndpoint The api endpoint to post the request
+   * @param queryParams The query parameters to send the delete request with.
+   * @returns Promise<T> as Response
+   */
+  async deleteRequestWithQuery<T>(
+    serviceEndpoint: string,
+    queryParams: URLSearchParams
+  ): Promise<T> {
+    const response = await fetch(
+      new URL(this.serviceBase).href +
+        "/" +
+        serviceEndpoint +
+        "?" +
+        queryParams.toString(),
+      { method: "DELETE" }
     );
     return (await response.json()) as T;
   }

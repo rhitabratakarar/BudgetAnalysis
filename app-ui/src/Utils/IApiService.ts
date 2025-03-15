@@ -10,6 +10,10 @@ interface IApiService {
     serviceEndpoint: string,
     body: FormData
   ): Promise<T>;
+  deleteRequestWithQuery<T>(
+    serviceEndpoint: string,
+    queryParams: URLSearchParams
+  ): Promise<T>;
 }
 
 export default IApiService;

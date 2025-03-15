@@ -71,7 +71,13 @@ export default function BulkDelete(props: IProps) {
    * @param month The month name which should be deleted.
    */
   async function sendDeletionRequest(year: string, month: string) {
-    console.log(year, month);
+    const queryParams: URLSearchParams = new URLSearchParams({
+      yearName: year,
+      monthName: month,
+    });
+    props.apiService
+      ?.deleteRequestWithQuery(config.BulkDelete, queryParams)
+      .then((data) => console.log("Bulk Upload Deletion Request Status: " + data));
   }
 
   return (
