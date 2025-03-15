@@ -12,6 +12,5 @@ namespace BudgetAnalysisDbApi.Database
         public Task<IList<Year>> GetYearList();
         public Task<int> BulkUploadDelete(string yearName, string monthName);
         public Task<IList<SearchResults>> GetSearchResults(string searchQry);
-        public Task<bool> InsertSingleExpense(ExpenseDTO expenseDTO);
     }
 }

@@ -46,16 +46,6 @@ export default function Navbar(props: IProps) {
                 Home
               </button>
             </li>
-            <li className="nav-item mx-2">
-              <button
-                className={`nav-link ${
-                  Currentpage.Insert === props.currentPage ? "active" : ""
-                }`}
-                onClick={() => props.setCurrentPage(Currentpage.Insert)}
-              >
-                Insert
-              </button>
-            </li>
             <li className="nav-item dropdown mx-2">
               <button
                 className={`nav-link dropdown-toggle ${
