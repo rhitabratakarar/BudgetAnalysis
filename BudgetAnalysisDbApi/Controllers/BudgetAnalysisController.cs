@@ -62,12 +62,12 @@ namespace BudgetAnalysisDbApi.Controllers
         /// <param name="dto">year code and month name are the basis of deletion</param>
         /// <returns>Integer to define whether the operation was success or failure.</returns>
         [HttpDelete("[action]")]
-        public async Task<int> BulkUploadDelete(BulkUploadDeleteDTO dto)
+        public async Task<int> BulkUploadDelete([FromQuery]string yearName, [FromQuery]string monthName)
         {
             // 1 = success
             // 0 = failure
-            this._logger.LogInformation("Initiating bulk deletion based on: " + dto.YearName + "/" + dto.MonthName);
-            int status = await this._dbService.BulkUploadDelete(dto.YearName, dto.MonthName);
+            this._logger.LogInformation("Initiating bulk deletion based on: " + yearName + "/" + monthName);
+            int status = await this._dbService.BulkUploadDelete(yearName, monthName);
             this._logger.LogInformation("Bulk deletion status: " + status);
             return status;
         }
@@ -130,24 +130,6 @@ namespace BudgetAnalysisDbApi.Controllers
         {
             IList<SearchResults> results = await this._dbService.GetSearchResults(searchStatement);
             return results;
-        }
-
-        /// <summary>
-        /// This action method is used to insert a single expense row from UI.
-        /// </summary>
-        /// <param name="expenseDTO">The transfer object received from the frontend</param>
-        /// <returns>integer status code (200 for success, 406 for failure)</returns>
-        [HttpPost]
-        public async Task<int> InsertSingleExpense([FromBody]ExpenseDTO expenseDTO)
-        {
-            bool status = false;
-
-            status = await this._dbService.InsertSingleExpense(expenseDTO);
-
-            if (status == true)
-                return StatusCodes.Status200OK;
-            else
-                return StatusCodes.Status406NotAcceptable;
         }
     }
 }

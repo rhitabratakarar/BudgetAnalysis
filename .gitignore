@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 # client secrets
 client_secrets.json
+
+# vscode
+*.vscode*

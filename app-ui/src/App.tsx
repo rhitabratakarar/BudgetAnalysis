@@ -3,7 +3,6 @@ import Navbar from "./components/Common/Navbar";
 import * as React from "react";
 import Currentpage from "./Utils/CurrentPage";
 import Home from "./components/Home";
-import Insert from "./components/Insert";
 import BulkDelete from "./components/BulkOperations/BulkDelete";
 import Empty from "./components/Empty/Empty";
 import Search from "./components/Search";
@@ -38,11 +37,6 @@ function App() {
       />
       {currentPage === Currentpage.Home ? (
         <Home apiService={apiService} />
-      ) : (
-        <Empty />
-      )}
-      {currentPage === Currentpage.Insert ? (
-        <Insert apiService={apiService} />
       ) : (
         <Empty />
       )}
