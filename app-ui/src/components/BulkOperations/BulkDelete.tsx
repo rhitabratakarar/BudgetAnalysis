@@ -35,6 +35,7 @@ export default function BulkDelete(props: IProps) {
       .catch((reason) => {
         alert("Error while getting Months List from db api: " + reason);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
