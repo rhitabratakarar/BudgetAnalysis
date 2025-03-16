@@ -70,7 +70,7 @@ export default function BulkDelete(props: IProps) {
    * @param year The Year name which should be deleted.
    * @param month The month name which should be deleted.
    */
-  async function sendDeletionRequest(year: string, month: string) {
+  function sendDeletionRequest(year: string, month: string) {
     const queryParams: URLSearchParams = new URLSearchParams({
       yearName: year,
       monthName: month,
