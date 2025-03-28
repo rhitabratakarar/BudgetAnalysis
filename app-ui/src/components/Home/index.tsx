@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import IApiService from "../../Utils/IApiService";
 import MonthlyExpenseCard from "../Widgets/MonthlyExpenseCard";
 
@@ -20,10 +19,15 @@ export default function Home(props: IProps) {
   };
 
   return (
-    <div className="container-fluid d-flex flex-row py-4 overflow">
-      <button id="scroll-control-left" onClick={handleScrollLeft}>
-        Test
-      </button>
+    <div className="container-fluid d-flex flex-row py-2 overflow align-items-center gap-2">
+      <div
+        id="scroll-control-left"
+        onClick={handleScrollLeft}
+        style={{ borderRadius: "50%", height: "40px", width: "40px" }}
+        className="btn btn-light shadow"
+      >
+        <i className="bi bi-caret-left"></i>
+      </div>
       <div
         id="home-cards-container"
         className="container-fluid d-flex flex-row py-4 overflow-x-scroll overflow-y-hidden flex-nowrap gap-5"
@@ -35,9 +39,14 @@ export default function Home(props: IProps) {
         <MonthlyExpenseCard />
         <MonthlyExpenseCard />
       </div>
-      <button id="scroll-control-right" onClick={handleScrollRight}>
-        Test
-      </button>
+      <div
+        id="scroll-control-right"
+        onClick={handleScrollRight}
+        style={{ borderRadius: "50%", height: "40px", width: "40px" }}
+        className="btn btn-light shadow"
+      >
+        <i className="bi bi-caret-right"></i>
+      </div>
     </div>
   );
 }
