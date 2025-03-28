@@ -35,21 +35,23 @@ function App() {
         setCurrentPage={setCurrentPage}
         setSearchStatement={setSearchStatement}
       />
-      {currentPage === Currentpage.Home ? (
-        <Home apiService={apiService} />
-      ) : (
-        <Empty />
-      )}
-      {currentPage === Currentpage.BulkDelete ? (
-        <BulkDelete apiService={apiService} />
-      ) : (
-        <Empty />
-      )}
-      {currentPage === Currentpage.Search ? (
-        <Search apiService={apiService} searchStatement={searchStatement} />
-      ) : (
-        <Empty />
-      )}
+      <div className="px-3 py-4">
+        {currentPage === Currentpage.Home ? (
+          <Home apiService={apiService} />
+        ) : (
+          <Empty />
+        )}
+        {currentPage === Currentpage.BulkDelete ? (
+          <BulkDelete apiService={apiService} />
+        ) : (
+          <Empty />
+        )}
+        {currentPage === Currentpage.Search ? (
+          <Search apiService={apiService} searchStatement={searchStatement} />
+        ) : (
+          <Empty />
+        )}
+      </div>
     </div>
   );
 }
