@@ -1,13 +1,19 @@
-export default function Card() {
+interface IProps {
+  label: string;
+  description?: string
+}
+
+export default function Card(props: IProps) {
   return (
-    <div className="card shadow-sm mx-4 flex-shrink-0 my-4 flex-grow-1" style={{ width: "23rem", maxWidth: "23rem" }}>
-      <img src="..." className="card-img-top" alt="" />
+    <div className="card text-center mb-3 shadow" style={{ width: "15rem", minWidth: "15rem" }}>
       <div className="card-body">
-        <p className="card-text mb-4">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        <h5 className="card-title">{props.label}</h5>
+        <p className="card-text">
+          {props.description}
         </p>
-        <button className="btn btn-primary">View Details</button>
+        <a href="#" className="btn btn-primary">
+          Go somewhere
+        </a>
       </div>
     </div>
   );

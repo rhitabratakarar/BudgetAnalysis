@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+#home-cards-container {
+  &::-webkit-scrollbar {
+    display: none; /* Hide the default scrollbar */
+  }
+}

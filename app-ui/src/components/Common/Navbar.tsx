@@ -18,7 +18,7 @@ export default function Navbar(props: IProps) {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm mb-3">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary shadow px-2">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           Budget Analysis UI
