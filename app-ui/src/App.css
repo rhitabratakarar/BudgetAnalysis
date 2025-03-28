@@ -9,3 +9,13 @@
     display: none; /* Hide the default scrollbar */
   }
 }
+
+@media (max-width: 576px) {
+  #scroll-control-right {
+    display: none;
+  }
+
+  #scroll-control-left {
+    display: none;
+  }
+}
