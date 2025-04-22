@@ -1,5 +1,8 @@
 import IApiService from "../../Utils/IApiService";
 import MonthlyExpenseCard from "../Widgets/MonthlyExpenseCard";
+import MonthlyExpenseComparison from "../Widgets/MonthlyExpenseComparison";
+import YearlyExpenseCard from "../Widgets/YearlyExpenseCard";
+import YearlyExpenseComparison from "../Widgets/YearlyExpenseComparison";
 
 interface IProps {
   apiService: IApiService | undefined;
@@ -33,11 +36,9 @@ export default function Home(props: IProps) {
         className="container-fluid d-flex flex-row py-4 overflow-x-scroll overflow-y-hidden flex-nowrap gap-5"
       >
         <MonthlyExpenseCard />
-        <MonthlyExpenseCard />
-        <MonthlyExpenseCard />
-        <MonthlyExpenseCard />
-        <MonthlyExpenseCard />
-        <MonthlyExpenseCard />
+        <YearlyExpenseCard />
+        <MonthlyExpenseComparison />
+        <YearlyExpenseComparison />
       </div>
       <div
         id="scroll-control-right"
