@@ -1,4 +1,5 @@
 import IApiService from "../../Utils/IApiService";
+import CategoricalSpending from "../Widgets/CategoricalSpending";
 import MonthlyExpenseCard from "../Widgets/MonthlyExpenseCard";
 import MonthlyExpenseComparison from "../Widgets/MonthlyExpenseComparison";
 import YearlyExpenseCard from "../Widgets/YearlyExpenseCard";
@@ -39,6 +40,7 @@ export default function Home(props: IProps) {
         <YearlyExpenseCard />
         <MonthlyExpenseComparison />
         <YearlyExpenseComparison />
+        <CategoricalSpending />
       </div>
       <div
         id="scroll-control-right"
