@@ -12,7 +12,7 @@ export default function Card(props: IProps) {
           {props.description}
         </p>
         <a href="#" className="btn btn-primary">
-          Go somewhere
+          View
         </a>
       </div>
     </div>
