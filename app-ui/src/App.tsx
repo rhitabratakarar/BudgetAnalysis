@@ -9,6 +9,7 @@ import Search from "./components/Search";
 import IApiService from "./Utils/IApiService";
 import ApiService from "./Utils/ApiService";
 import config from "./config";
+import AiChat from "./components/AiChat";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState<Currentpage>(
@@ -52,6 +53,7 @@ function App() {
           <Empty />
         )}
       </div>
+      <AiChat />
     </div>
   );
 }
