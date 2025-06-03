@@ -35,6 +35,9 @@ export default function Home(props: IProps) {
       <div
         id="home-cards-container"
         className="container-fluid d-flex flex-row py-4 overflow-x-scroll overflow-y-hidden flex-nowrap gap-5"
+        style={{
+          scrollbarWidth: "none",
+        }}
       >
         <MonthlyExpenseCard />
         <YearlyExpenseCard />
