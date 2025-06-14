@@ -1,10 +1,9 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿using DataAccess;
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Util.Store;
 using Microsoft.Extensions.Configuration;
-using System.Text;
-using System.Text.Json;
 
 namespace SheetSyncTool
 {
@@ -12,9 +11,12 @@ namespace SheetSyncTool
     {
         private readonly IConfiguration configuration;
 
-        public SheetSyncer(IConfiguration configuration)
+        private readonly IDbDataAccess dbDataAccess;
+
+        public SheetSyncer(IConfiguration configuration, IDbDataAccess dbDataAccess)
         {
             this.configuration = configuration;
+            this.dbDataAccess = dbDataAccess;
         }
 
         /// <summary>
@@ -85,18 +87,7 @@ namespace SheetSyncTool
         {
             if (marshalledContent != null)
             {
-                HttpClient client = new HttpClient();
-
-                StringContent stringContent = new StringContent(JsonSerializer.Serialize(marshalledContent),
-                                                                    encoding: Encoding.UTF8,
-                                                                    "application/json");
-
-                HttpResponseMessage response = await client.PostAsync(this.configuration["DataInsertionDbAPI"], stringContent);
-
-                if (response.IsSuccessStatusCode)
-                    Console.WriteLine("Received 200 status code! OK. 👍");
-                else
-                    throw new Exception("❌ Success status not received. Debug to find out.");
+                this.dbDataAccess.SaveToDatabaseFromTool();
             }
             else
             {
