@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
@@ -43,11 +44,9 @@ namespace SheetSyncTool
 
             SheetsService service = GetSpreadSheetService(credential);
 
-            IList<IList<object>> contentToSend = await GetContentToSendFromSpreadSheet(spreadSheetId, rangeInSheet, service);
+            IList<IList<object>> contentToSaveInDatabase = await GetContentToSaveIntoDatabase(spreadSheetId, rangeInSheet, service);
 
-            IDictionary<string, IList<IList<object>>> marshalledContent = GetMarshalledContent(contentToSend);
-
-            await SaveToDatabase(marshalledContent);
+            await SaveToDatabase(contentToSaveInDatabase);
         }
 
         private async Task<UserCredential> GenerateAndGetValidCredential(string clientSecretFile)
@@ -83,15 +82,15 @@ namespace SheetSyncTool
                 throw new Exception("Find NULL for credential object.");
         }
 
-        private async Task SaveToDatabase(IDictionary<string, IList<IList<object>>>? marshalledContent)
+        private async Task SaveToDatabase(IList<IList<object>> contentToSave)
         {
-            if (marshalledContent != null)
+            try
             {
-                this.dbDataAccess.SaveToDatabaseFromTool();
+                throw new NotImplementedException("SaveToDatabase Not implemented yet.");
             }
-            else
+            catch(Exception e)
             {
-                throw new Exception("Content is missing 😵‍💫. Debug to find it out 😓");
+                throw new Exception(e.Message);
             }
         }
 
@@ -114,7 +113,7 @@ namespace SheetSyncTool
             return service;
         }
 
-        private async Task<IList<IList<object>>> GetContentToSendFromSpreadSheet(string spreadSheetId, string rangeInSheet, SheetsService service)
+        private async Task<IList<IList<object>>> GetContentToSaveIntoDatabase(string spreadSheetId, string rangeInSheet, SheetsService service)
         {
             IList<IList<object>>? contentToSend = null;
 
@@ -141,26 +140,6 @@ namespace SheetSyncTool
                 return contentToSend;
             else
                 throw new Exception("Received NULL while getting content.");
-        }
-
-        public IDictionary<string, IList<IList<object>>> GetMarshalledContent(IList<IList<object>> content)
-        {
-            IDictionary<string, IList<IList<object>>> marshalledContent = new Dictionary<string, IList<IList<object>>>();
-
-            if (content != null)
-            {
-                content.Insert(0, new List<object>() { "Year", this.configuration["SheetYear"]! });
-                content.Insert(1, new List<object>() { "Month", this.configuration["SheetName"]! });
-                content.Insert(2, new List<object>() { "SheetColumnRange", this.configuration["SheetColumnRange"]! });
-
-                marshalledContent.Add("InsertionData", content);
-            }
-            else
-            {
-                throw new Exception("❌ Received Empty content from GCloud.");
-            }
-
-            return marshalledContent;
         }
     }
 }

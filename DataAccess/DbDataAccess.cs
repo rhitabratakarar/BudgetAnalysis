@@ -4,19 +4,19 @@ namespace DataAccess
 {
     public class DbDataAccess : IDbDataAccess
     {
-        private readonly string _connectionString;
         private readonly BudgetAnalysisDbContext dbContext;
+
+        public BudgetAnalysisDbContext DbContext
+        {
+            get
+            {
+                return this.dbContext;
+            }
+        }
 
         public DbDataAccess(string connectionString)
         {
-            this._connectionString = connectionString;
             this.dbContext = new BudgetAnalysisDbContext(connectionString);
-        }
-
-        public bool SaveToDatabaseFromTool()
-        {
-            Console.WriteLine(this._connectionString);
-            return true;
         }
     }
 }

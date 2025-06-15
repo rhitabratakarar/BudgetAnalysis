@@ -1,7 +1,9 @@
-﻿namespace DataAccess
+﻿using DataAccess.Context;
+
+namespace DataAccess
 {
     public interface IDbDataAccess
     {
-        public bool SaveToDatabaseFromTool();
+        BudgetAnalysisDbContext DbContext { get; }
     }
 }
