@@ -4,6 +4,35 @@
     ViewData["Title"] = "Search Expenses";
 }
 
-<div>
-    <p>This page is dedicated for searching expenses</p>
-</div>
+<form class="mt-5 mb-5" method="post" asp-page="/Search">
+    <div class="input-group mb-2">
+        <input type="text" class="form-control" asp-for="SearchInput" placeholder="Search an expense..." 
+                    aria-label="Search an expense..." aria-describedby="button-search" />
+        <button class="btn btn-primary" type="submit" id="button-search">Search</button>
+    </div>
+    <span asp-validation-for="SearchInput" class="text-danger"></span>
+</form>
+
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Year</th>
+            <th scope="col">Month</th>
+            <th scope="col">Name</th>
+            <th scope="col">Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var expense in Model.Expenses)
+        {
+            <tr>
+                <th scope="row">@expense.Id</th>
+                <td>@expense.Year.YearCode</td>
+                <td>@expense.Month.MonthName</td>
+                <td>@expense.ExpenseName</td>
+                <td>@expense.ExpenseCost</td>
+            </tr>
+        }
+    </tbody>
+</table>

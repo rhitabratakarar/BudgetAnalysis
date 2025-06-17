@@ -1,7 +1,13 @@
+using DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IDbDataAccess>(provider =>
+{
+    return new DbDataAccess(builder.Configuration.GetConnectionString("BudgetAnalysis")!);
+});
 
 var app = builder.Build();
 
