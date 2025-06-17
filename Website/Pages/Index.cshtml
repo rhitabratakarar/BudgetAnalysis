@@ -5,6 +5,15 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">👋 Welcome</h1>
+    <p>Pick the option that works best for you from the list below...</p>
 </div>
+
+<ul>
+    <li><a asp-page="/YearlyExpenditure" class="text-decoration-none">Yearly Expenditure</a></li>
+    <li><a asp-page="/MonthlyExpenditure" class="text-decoration-none">Monthly Expenditure</a></li>
+    <li><a asp-page="/WeeklyExpenditure" class="text-decoration-none">Weekly Expenditure</a></li>
+    <li><a asp-page="/CategoryExpense" class="text-decoration-none">Sort by Category</a></li>
+    <li><a asp-page="/Search" class="text-decoration-none">Search your expenses</a></li>
+    <li><a asp-page="/Export" class="text-decoration-none">Export your expenses</a></li>
+</ul>
