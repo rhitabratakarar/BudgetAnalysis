@@ -4,6 +4,23 @@
     ViewData["Title"] = "Yearly Expenses";
 }
 
-<div>
-    <p>This page is dedicated to show Yearly Expenses</p>
-</div>
+<p>Select the relevant years from the below area 👇</p>
+<p><strong>Note: </strong>Hold 'ctrl' to select multiple...</p>
+
+<form method="post" asp-page="/YearlyExpenditure" class="mt-3 mb-3 text-center">
+    <div class="mb-3 mt-3">
+        <select class="form-select" id="" multiple aria-label="Select multiple years..." asp-for="SelectedYears">
+            <option selected value="select">--Select--</option>
+            @{
+                if (Model.ListOfYearsAvailableInDatabase != null && Model.ListOfYearsAvailableInDatabase.Any())
+                {
+                    foreach (var year in Model.ListOfYearsAvailableInDatabase)
+                    {
+                        <option value="@year.YearCode">@year.YearCode</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
