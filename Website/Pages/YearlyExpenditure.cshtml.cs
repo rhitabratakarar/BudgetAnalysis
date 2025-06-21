@@ -12,6 +12,7 @@ namespace Website.Pages
         public IList<string>? SelectedYears { get; set; }
 
         public IList<Year>? ListOfYearsAvailableInDatabase { get; set; }
+        public IDictionary<Year, double> SumOfExpendituresByYears { get; set; }
 
 
         private readonly IDbDataAccess dbDataAccess;
@@ -34,7 +35,37 @@ namespace Website.Pages
             IList<Year> yearsAvailable = await this.dbDataAccess.DbContext.Years.ToListAsync();
             this.ListOfYearsAvailableInDatabase = yearsAvailable;
 
-            // additional calculations
+            // get total expenditure(s) of the year(s).
+            this.SumOfExpendituresByYears = await GetSumOfExpenditureByYears();
+
+            // pie chart
+
+            // top 10 expenses of year(s)
+        }
+
+        private async Task<IDictionary<Year, double>> GetSumOfExpenditureByYears()
+        {
+            IDictionary<Year, double> expendituresByYears = new Dictionary<Year, double>();
+
+            if (this.SelectedYears != null && this.SelectedYears.Any())
+            {
+                foreach(string y in this.SelectedYears)
+                {
+                    if (y != null && y != "select")
+                    {
+                        IList<Expense>? expenses = await this.dbDataAccess.DbContext.Expenses
+                            .Include(e => e.Year)
+                            .Where(e => e.Year.YearCode == Convert.ToInt32(y))
+                            .ToListAsync();
+
+                        Year year = new Year() { YearCode = Convert.ToInt32(y) };
+
+                        expendituresByYears[year] = expenses.Sum(e => e.ExpenseCost);
+                    }
+                }
+            }
+
+            return expendituresByYears;
         }
     }
 }
