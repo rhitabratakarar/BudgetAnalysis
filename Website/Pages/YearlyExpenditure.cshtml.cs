@@ -12,7 +12,7 @@ namespace Website.Pages
         public IList<string>? SelectedYears { get; set; }
 
         public IList<Year>? ListOfYearsAvailableInDatabase { get; set; }
-        public IDictionary<Year, double> SumOfExpendituresByYears { get; set; }
+        public IDictionary<Year, double>? SumOfExpendituresByYears { get; set; }
 
 
         private readonly IDbDataAccess dbDataAccess;
