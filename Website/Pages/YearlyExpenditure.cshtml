@@ -7,7 +7,7 @@
 <p>Select the relevant years from the below area 👇</p>
 <p><strong>Note: </strong>Hold 'ctrl' to select multiple...</p>
 
-<form method="post" asp-page="/YearlyExpenditure" class="mt-3 mb-3 text-center">
+<form method="post" asp-page="/YearlyExpenditure" class="mt-3 mb-5 text-center"> 
     <div class="mb-3 mt-3">
         <select class="form-select" id="" multiple aria-label="Select multiple years..." asp-for="SelectedYears">
             <option selected value="select">-- Select --</option>
@@ -25,10 +25,8 @@
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 
-<hr />
 
-<div>
-    
+<div class="mt-5 mb-5">
     @{
         if (Model.SumOfExpendituresByYears != null && Model.SumOfExpendituresByYears.Any())
         {
@@ -45,4 +43,9 @@
             </ul>
         }
     }
+</div>
+
+
+<div class="pie-chart-section mb-5 mt-5">
+
 </div>
