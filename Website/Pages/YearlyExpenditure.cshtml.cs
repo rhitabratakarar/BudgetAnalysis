@@ -49,7 +49,7 @@ namespace Website.Pages
 
             if (this.SelectedYears != null && this.SelectedYears.Any())
             {
-                foreach(string y in this.SelectedYears)
+                foreach (string y in this.SelectedYears)
                 {
                     if (y != null && y != "select")
                     {
