@@ -4,6 +4,39 @@
     ViewData["Title"] = "Cleanup";
 }
 
-<div>
-    This page is dedicated for cleanup.
-</div>
+<p>
+    <strong>Note: </strong>Use this page carefully. Removed data will need to be imported again.
+</p>
+<p><strong>Hint: </strong>Hold 'ctrl' to select multiple...</p>
+
+<form method="post" asp-page="/CleanUp" class="mt-3 mb-5 text-center">
+    <div class="mb-3 mt-3">
+        <select class="form-select" id="" multiple aria-label="Select multiple years..." asp-for="SelectedYears">
+            <option selected value="select">-- Select Year(s) --</option>
+            @{
+                if (Model.ListOfYearsAvailableInDatabase != null && Model.ListOfYearsAvailableInDatabase.Any())
+                {
+                    foreach (var year in Model.ListOfYearsAvailableInDatabase)
+                    {
+                        <option value="@year.YearCode">@year.YearCode</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div class="mb-3 mt-3">
+        <select class="form-select" id="" multiple aria-label="Select multiple months..." asp-for="SelectedMonths">
+            <option selected value="select">-- Select Month(s) --</option>
+            @{
+                if (Model.ListOfMonthsAvailableInDatabase != null && Model.ListOfMonthsAvailableInDatabase.Any())
+                {
+                    foreach (var month in Model.ListOfMonthsAvailableInDatabase)
+                    {
+                        <option value="@month.MonthName">@month.MonthName</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
