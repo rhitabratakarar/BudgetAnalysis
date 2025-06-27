@@ -4,64 +4,6 @@
     ViewData["Title"] = "Yearly Expenses";
 }
 
-
-@* according to _Layout.cshtml, after the body is rendered, these scripts will be executed. *@
-@section Scripts {
-    <script>
-        const labels = ['Rent', 'Groceries', 'Utilities', 'Entertainment'];
-        const data = {
-          labels: labels,
-          datasets: [{
-            axis: 'y',
-            data: [65, 59, 80, 81],
-            fill: false,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-          }]
-        };
-        
-        const ctx = document.getElementById('year-expenditures-chart').getContext('2d');
-        const barChart = new Chart(ctx, {
-            type: "bar",
-            data: data,
-            options: {
-                indexAxis: 'y',
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        grid: { display: false }
-                    },
-                    y: {
-                        grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    title: { display: false },
-                },
-                responsive: true,
-            },
-        });
-    </script>
-}
-
 <p>Select the relevant years from the below area 👇</p>
 <p><strong>Note: </strong>Hold <strong>'ctrl'</strong> to select multiple...</p>
 
@@ -99,17 +41,6 @@
                     }
                 }
             </ul>
-        }
-    }
-</div>
-
-
-<div class="chart-section mb-5 mt-5">
-    @{
-        if (Model.SumOfExpendituresByYears != null && Model.SumOfExpendituresByYears.Any())
-        {
-            <h4>✅ Yearly Expenditures: </h4>
-            <canvas id="year-expenditures-chart"></canvas>
         }
     }
 </div>

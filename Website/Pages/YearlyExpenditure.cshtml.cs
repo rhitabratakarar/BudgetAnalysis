@@ -37,10 +37,6 @@ namespace Website.Pages
 
             // get total expenditure(s) of the year(s).
             this.SumOfExpendituresByYears = await GetSumOfExpenditureByYears();
-
-            // pie chart
-
-            // top 10 expenses of year(s)
         }
 
         private async Task<IDictionary<Year, double>> GetSumOfExpenditureByYears()
