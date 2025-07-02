@@ -4,6 +4,34 @@
     ViewData["Title"] = "Monthly Expenses";
 }
 
-<div>
-    <p>This page is dedicated to show Monthly Expenses</h1>
-</div>
+<form method="post" asp-page="/MonthlyExpenditure" class="mt-3 mb-5 text-center">
+    <div class="mb-3 mt-3">
+        <select class="form-select" id="" multiple aria-label="Select multiple years..." asp-for="SelectedYears">
+            <option selected value="select">-- Select Year(s) --</option>
+            @{
+                if (Model.ListOfYearsAvailableInDatabase != null && Model.ListOfYearsAvailableInDatabase.Any())
+                {
+                    foreach (var year in Model.ListOfYearsAvailableInDatabase)
+                    {
+                        <option value="@year.YearCode">@year.YearCode</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div class="mb-3 mt-3">
+        <select class="form-select" id="" multiple aria-label="Select multiple months..." asp-for="SelectedMonths">
+            <option selected value="select">-- Select Month(s) --</option>
+            @{
+                if (Model.ListOfMonthsAvailableInDatabase != null && Model.ListOfMonthsAvailableInDatabase.Any())
+                {
+                    foreach (var month in Model.ListOfMonthsAvailableInDatabase)
+                    {
+                        <option value="@month.MonthName">@month.MonthName</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
